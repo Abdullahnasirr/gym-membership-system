@@ -15,12 +15,15 @@ public class Menu {
             int choice = readInt("please choose one of the options: ");
 
             switch (choice) {
+                case Constants.EXIT:
 
-                case 0:
                     running = false;
+
                     System.out.println("bye!!!");
+
                     break;
                 default:
+
                     System.out.println("your option was invalid, please go again");
             }
 
