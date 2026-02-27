@@ -24,4 +24,19 @@ public class Data {
     public static final String TYPE_QUARTERLY = "Quarterly";
     public static final String TYPE_ANNUALLY = "Annually";
 
+    // ===================== ID Generator ========================
+
+    // Starting ID number (Starting ID number is set to 1000 for now, but can be changed)
+    private static int nextId = 1000;
+
+    // Method that generates a unique member ID
+    private static int generateNewId() {
+
+        // Safety check: ensure member ID does not already exist
+        while (membersById.containsKey(nextId)) {
+            nextId++;
+        }
+
+        return nextId++;
+    }
 }
