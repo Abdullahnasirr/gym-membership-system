@@ -6,18 +6,18 @@ public class Menu {
 
     public static void start() {
 
-        boolean functionrunning = true;
+        boolean running = true;
 
-        while (functionrunning) {
+        while (running) {
 
             printMenu();
 
-            int makeachoice = readInt("please choose one of the options: ");
+            int choice = readInt("please choose one of the options: ");
 
-            switch (makeachoice) {
+            switch (choice) {
 
                 case 0:
-                    functionrunning = false;
+                    running = false;
                     System.out.println("bye!!!");
                     break;
                 default:
@@ -65,7 +65,12 @@ public class Menu {
             System.out.print("please enter a valid integer: ");
         }
         int value = INPUT.nextInt();
-        INPUT.nextLine(); // consume newline
+        INPUT.nextLine();
         return value;
+    }
+
+    private static String readString(String prompt) {
+        System.out.print(prompt);
+        return INPUT.nextLine().trim();
     }
 }
