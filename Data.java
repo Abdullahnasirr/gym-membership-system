@@ -39,4 +39,34 @@ public class Data {
 
         return nextId++;
     }
+
+    // ===================== Option 1 - Add Member ========================
+
+    public static int addMember(String name, String type) {
+
+        // Generate unique ID
+        int id = generateNewId();
+
+        // Create new member record
+        Object[] member = new Object[6];
+
+        member[INDEX_ID] = id;
+        member[INDEX_NAME] = name;
+        member[INDEX_TYPE] = type;
+
+        // Default values
+        member[INDEX_VISITS] = 0;        // Integer
+        member[INDEX_TOTAL_PAID] = 0.0;  // Double
+        member[INDEX_ACTIVE] = true;     // Boolean
+
+        // Store in HashMap
+        membersById.put(id, member);
+
+        // Maintain insertion order list
+        memberIdList.add(id);
+
+        return id;
+
+    }
+
 }
