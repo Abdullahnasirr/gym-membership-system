@@ -69,4 +69,18 @@ public class Data {
 
     }
 
+    // ===================== Option 2 - Update Member ========================
+
+    public static boolean updateMemberInfo(int id, String newName, String newType) {
+
+        Object[] member = membersById.get(id);
+        if (member == null) {
+            return false; // not found
+        }
+
+        member[INDEX_NAME] = newName;
+        member[INDEX_TYPE] = newType;
+
+        return true;
+    }
 }
