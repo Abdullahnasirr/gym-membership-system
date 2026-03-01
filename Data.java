@@ -99,4 +99,20 @@ public class Data {
 
         return true;
     }
+
+    // ===================== Option 4 - Record Payment ========================
+
+    public static boolean recordPayment(int id, double amount) {
+
+        Object[] member = membersById.get(id);
+
+        if (member == null) {
+            return false; // Member not found
+        }
+
+        double currentTotal = (Double) member[INDEX_TOTAL_PAID];
+        member[INDEX_TOTAL_PAID] = currentTotal + amount;
+
+        return true;
+    }
 }
