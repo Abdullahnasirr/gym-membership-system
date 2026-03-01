@@ -16,3 +16,12 @@ public static int activeMembers() {
 
     return count;
 }
+public static double totalRevenue() {
+    double total = 0.0;
+
+    for (Object[] member : Data.membersById.values()) {
+        total += (double) member[Data.INDEX_TOTAL_PAID];
+    }
+
+    return total;
+}
