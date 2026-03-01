@@ -38,3 +38,15 @@ public static int inactiveOrZeroVisits() {
     }
 
     return count;
+}
+public static List<Object[]> topFiveByVisits() {
+
+    List<Object[]> list = new ArrayList<>(Data.membersById.values());
+
+    list.sort((a, b) ->
+            Integer.compare((int)b[Data.INDEX_VISITS],
+                    (int)a[Data.INDEX_VISITS])
+    );
+
+    return list.subList(0, Math.min(5, list.size()));
+}
