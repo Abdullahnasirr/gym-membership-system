@@ -25,3 +25,16 @@ public static double totalRevenue() {
 
     return total;
 }
+public static int inactiveOrZeroVisits() {
+    int count = 0;
+
+    for (Object[] member : Data.membersById.values()) {
+        boolean active = (boolean) member[Data.INDEX_ACTIVE];
+        int visits = (int) member[Data.INDEX_VISITS];
+
+        if (!active || visits == 0) {
+            count++;
+        }
+    }
+
+    return count;
