@@ -83,4 +83,20 @@ public class Data {
 
         return true;
     }
+
+    // ===================== Option 3 - Record Check-In ========================
+
+    public static boolean recordCheckIn(int id) {
+
+        Object[] member = membersById.get(id);
+
+        if (member == null) {
+            return false; // Member not found
+        }
+
+        int visits = (Integer) member[INDEX_VISITS];
+        member[INDEX_VISITS] = visits + 1;
+
+        return true;
+    }
 }
