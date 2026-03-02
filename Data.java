@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Data {
     // ====================== Data Storage Structures =======================
@@ -128,5 +129,21 @@ public class Data {
 
         member[INDEX_ACTIVE] = status;
         return true;
+    }
+
+// ===================== Option 6 - Get All Members ========================
+
+    public static List<Object[]> getAllMembers() {
+
+        ArrayList<Object[]> allMembers = new ArrayList<>();
+
+        for (int id : memberIdList) {
+            Object[] member = membersById.get(id);
+            if (member != null) {
+                allMembers.add(member);
+            }
+        }
+
+        return allMembers;
     }
 }
