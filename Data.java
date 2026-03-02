@@ -147,7 +147,7 @@ public class Data {
         return allMembers;
     }
 
-// ===================== Option 6 - Lookup Member By ID ========================
+// ===================== Option 7 - Lookup Member By ID ========================
 
     public static Object[] getMemberById(int id) {
         return membersById.get(id); // Returns null if not found
