@@ -115,4 +115,18 @@ public class Data {
 
         return true;
     }
+
+    // ===================== Option 5 - Set Active Status ========================
+
+    public static boolean setActiveStatus(int id, boolean status) {
+
+        Object[] member = membersById.get(id);
+
+        if (member == null) {
+            return false; // Member not found
+        }
+
+        member[INDEX_ACTIVE] = status;
+        return true;
+    }
 }
