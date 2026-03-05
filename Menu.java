@@ -15,6 +15,25 @@ public class Menu {
             int choice = readInt("please choose one of the options: ");
 
             switch (choice) {
+                case Constants.ADD_MEMBER:
+                    System.out.println("add member selected");
+                    break;
+
+                case Constants.UPDATE_MEMBER:
+                    System.out.println("update member selected");
+                    break;
+
+                case Constants.CHECK_IN:
+                    System.out.println("check in selected");
+                    break;
+
+                case Constants.PAYMENT:
+                    System.out.println("payment selected");
+                    break;
+
+                case Constants.VIEW_ALL:
+                    System.out.println("view all members selected");
+                    break;
                 case Constants.EXIT:
 
                     running = false;
