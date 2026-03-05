@@ -58,6 +58,7 @@ public class Menu {
             }
 
             System.out.println();
+            pressEnterToContinue();
         }
     }
     private static void printHeader() {
@@ -103,6 +104,10 @@ public class Menu {
         int value = INPUT.nextInt();
         INPUT.nextLine();
         return value;
+    }
+    private static void pressEnterToContinue() {
+        System.out.println("press ENTER to continue");
+        INPUT.nextLine();
     }
 
     private static String readString(String prompt) {
