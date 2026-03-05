@@ -49,7 +49,7 @@ public class Menu {
 
                     running = false;
 
-                    System.out.println("bye!!!");
+                    printGoodbye();
 
                     break;
                 default:
@@ -65,6 +65,11 @@ public class Menu {
         System.out.println("=================================");
         System.out.println("        gym membership system");
         System.out.println("=================================");
+    }
+    private static void printGoodbye() {
+        System.out.println();
+        System.out.println("Thanks  for using our gym membership system.");
+        System.out.println("bye bye!");
     }
     private static void printMenu() {
 
