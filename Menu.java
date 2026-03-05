@@ -9,7 +9,7 @@ public class Menu {
         boolean running = true;
 
         while (running) {
-
+            printHeader();
             printMenu();
 
             int choice = readInt("please choose one of the options: ");
@@ -30,7 +30,12 @@ public class Menu {
             System.out.println();
         }
     }
-
+    private static void printHeader() {
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("        gym membership system");
+        System.out.println("=================================");
+    }
     private static void printMenu() {
         System.out.println("==== Gym Membership System ====");
 
