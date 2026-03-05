@@ -1,6 +1,17 @@
 import java.util.Scanner;
 
 public class Menu {
+    private static int readMenuChoice() {
+
+        int choice = readInt(" choose one of the options: ");
+
+        while (choice < 0 || choice > 12) {
+            System.out.println("please choose a number between 0 and 12 ");
+            choice = readInt("please choose one of the options: ");
+        }
+
+        return choice;
+    }
 
     private static final Scanner INPUT = new Scanner(System.in);
 
@@ -12,7 +23,7 @@ public class Menu {
             printHeader();
             printMenu();
 
-            int choice = readInt("please choose one of the options: ");
+            int choice = readMenuChoice();
 
             switch (choice) {
                 case Constants.ADD_MEMBER:
