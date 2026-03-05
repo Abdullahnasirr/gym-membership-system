@@ -56,33 +56,26 @@ public class Menu {
         System.out.println("=================================");
     }
     private static void printMenu() {
-        System.out.println("==== Gym Membership System ====");
 
-        System.out.println("1) add a new member");
+        String[] menuOptions = {
+                "1) add a new member",
+                "2) add update a members info",
+                "3) record a members check in",
+                "4) record a payment",
+                "5) set a membership active or inactive",
+                "6) view all the members",
+                "7) view members by their ID",
+                "8) summary of total members and active members",
+                "9) summary of total revenue",
+                "10) summary of top 5 visits",
+                "11) Summary of inactive or 0 visits",
+                "12) Summary of average visits by type",
+                "0) Exit"
+        };
 
-        System.out.println("2) add update a members info");
-
-        System.out.println("3) record a members check in");
-
-        System.out.println("4) record a payment");
-
-        System.out.println("5) set a membership active or inactive");
-
-        System.out.println("6) view all the members");
-
-        System.out.println("7) view members by their ID");
-
-        System.out.println("8) summary of total members and active members");
-
-        System.out.println("9) summary of total revenue");
-
-        System.out.println("10) summary of top 5 visits");
-
-        System.out.println("11) Summary of inactive or 0 visits");
-
-        System.out.println("12) Summary of average visits by type");
-
-        System.out.println("0) Exit");
+        for (String option : menuOptions) {
+            System.out.println(option);
+        }
     }
 
     private static int readInt(String prompt) {
