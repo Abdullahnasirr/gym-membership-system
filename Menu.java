@@ -148,6 +148,19 @@ public class Menu {
         return value;
     }
 
+    private static double readDouble(String prompt) {
+        System.out.println(prompt);
+
+        while (! INPUT.hasNextDouble()) {
+            INPUT.nextLine();
+            System.out.print("please enter a valid number: ");
+        }
+
+        double value = INPUT.nextDouble();
+        INPUT.nextLine();
+        return value;
+    }
+
     private static String readString(String prompt) {
         System.out.print(prompt);
         return INPUT.nextLine().trim();
