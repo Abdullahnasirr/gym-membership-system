@@ -125,9 +125,16 @@ class DataTest {
     @Test
     void getMemberById() {
         //Arrange
+        int id = Data.addMember("Brandon", Data.TYPE_MONTHLY);
 
         //Act
+        Object[] foundMember = Data.getMemberById(id);
+        Object[] missingMember = Data.getMemberById(999999);
 
         //Assert
+        assertNotNull(foundMember);
+        assertEquals("Brandon", foundMember[Data.INDEX_NAME]);
+        assertEquals(Data.TYPE_MONTHLY, foundMember[Data.INDEX_TYPE]);
+        assertNull(missingMember);
     }
 }
