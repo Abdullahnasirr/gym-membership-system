@@ -51,8 +51,22 @@ class DataTest {
         assertEquals(Data.TYPE_ANNUALLY, member[Data.INDEX_TYPE]);
     }
 
+    // ====================== recordCheckIn() Test Case =======================
     @Test
     void recordCheckIn() {
+        //Arrange
+        int id = Data.addMember("Brandon", Data.TYPE_QUARTERLY);
+
+        //Act
+        boolean firstCheckIn = Data.recordCheckIn(id);
+        boolean secondCheckIn = Data.recordCheckIn(id);
+        Object[] member = Data.getMemberById(id);
+
+        //Assert
+        assertTrue(firstCheckIn);
+        assertTrue(secondCheckIn);
+        assertEquals(2, member[Data.INDEX_VISITS]);
+        assertFalse(Data.recordCheckIn(999999));
     }
 
     @Test
