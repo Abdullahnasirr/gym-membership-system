@@ -103,11 +103,31 @@ class DataTest {
         assertFalse(Data.setActiveStatus(999999, true));
     }
 
+    // ====================== getAllMembers() Test Case =======================
     @Test
     void getAllMembers() {
+        //Arrange
+        int member1 = Data.addMember("Brandon 1", Data.TYPE_MONTHLY);
+        int member2 = Data.addMember("Brandon 2", Data.TYPE_ANNUALLY);
+
+        //Act
+        List<Object[]> membersList = Data.getAllMembers();
+
+        //Assert
+        assertEquals(2, membersList.size());
+        assertEquals(member1, membersList.get(0)[Data.INDEX_ID]);
+        assertEquals(member2, membersList.get(1)[Data.INDEX_ID]);
+        assertEquals("Brandon 1", membersList.get(0)[Data.INDEX_NAME]);
+        assertEquals("Brandon 2", membersList.get(1)[Data.INDEX_NAME]);
     }
 
+    // ====================== getMemberById() Test Case =======================
     @Test
     void getMemberById() {
+        //Arrange
+
+        //Act
+
+        //Assert
     }
 }
