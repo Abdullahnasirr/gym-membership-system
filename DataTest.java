@@ -69,8 +69,22 @@ class DataTest {
         assertFalse(Data.recordCheckIn(999999));
     }
 
+    // ====================== recordPayment() Test Case =======================
     @Test
     void recordPayment() {
+        //Arrange
+        int id = Data.addMember("Brandon", Data.TYPE_MONTHLY);
+
+        //Act
+        boolean firstPayment = Data.recordPayment(id, 15.4);
+        boolean secondPayment = Data.recordPayment(id, 35.4);
+        Object[] member = Data.getMemberById(id);
+
+        //Assert
+        assertTrue(firstPayment);
+        assertTrue(secondPayment);
+        assertEquals(50.8, (Double) member[Data.INDEX_TOTAL_PAID], 0.0001);
+        assertFalse(Data.recordPayment(999999, 10.10));
     }
 
     @Test
