@@ -87,8 +87,20 @@ class DataTest {
         assertFalse(Data.recordPayment(999999, 10.10));
     }
 
+    // ====================== setActiveStatus() Test Case =======================
     @Test
     void setActiveStatus() {
+        //Arrange
+        int id = Data.addMember("Brandon", Data.TYPE_ANNUALLY);
+
+        //Act
+        boolean changedStatus = Data.setActiveStatus(id, false);
+        Object[] member = Data.getMemberById(id);
+
+        //Assert
+        assertTrue(changedStatus);
+        assertEquals(false, member[Data.INDEX_ACTIVE]);
+        assertFalse(Data.setActiveStatus(999999, true));
     }
 
     @Test
