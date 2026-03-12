@@ -99,24 +99,9 @@ public class Menu {
         System.out.println("bye bye!");
     }
 
-    private static int readInt(String prompt) {
-        System.out.print(prompt);
-        while (!INPUT.hasNextInt()) {
-            INPUT.nextLine();
-            System.out.print("please enter a valid integer: ");
-        }
-        int value = INPUT.nextInt();
-        INPUT.nextLine();
-        return value;
-    }
     private static void pressEnterToContinue() {
         System.out.println("press ENTER to continue");
         INPUT.nextLine();
-    }
-
-    private static String readString(String prompt) {
-        System.out.print(prompt);
-        return INPUT.nextLine().trim();
     }
 
     private static String readNonEmptyString(String prompt) {
@@ -128,5 +113,43 @@ public class Menu {
         }
 
         return value;
+    }
+
+    private static String readMembershipType() {
+        System.out.println("Choose membership type:");
+        System.out.println("1) Monthly");
+        System.out.println("2) Quarterly");
+        System.out.println("3) Annually");
+
+        int choice = readInt("Enter membership type: ");
+
+        while (choice < 1 || choice > 3) {
+            System.out.println("Please choose 1, 2, or 3.");
+            choice = readInt("Enter membership type: ");
+        }
+
+        if (choice == 1) {
+            return Data.TYPE_MONTHLY;
+        } else if (choice == 2) {
+            return Data.TYPE_QUARTERLY;
+        } else {
+            return Data.TYPE_ANNUALLY;
+        }
+    }
+
+    private static int readInt(String prompt) {
+        System.out.print(prompt);
+        while (!INPUT.hasNextInt()) {
+            INPUT.nextLine();
+            System.out.print("please enter a valid integer: ");
+        }
+        int value = INPUT.nextInt();
+        INPUT.nextLine();
+        return value;
+    }
+
+    private static String readString(String prompt) {
+        System.out.print(prompt);
+        return INPUT.nextLine().trim();
     }
 }
