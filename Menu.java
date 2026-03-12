@@ -1,17 +1,6 @@
 import java.util.Scanner;
 
 public class Menu {
-    private static int readMenuChoice() {
-
-        int choice = readInt(" choose one of the options: ");
-
-        while (choice < 0 || choice > 12) {
-            System.out.println("please choose a number between 0 and 12 ");
-            choice = readInt("please choose one of the options: ");
-        }
-
-        return choice;
-    }
 
     private static final Scanner INPUT = new Scanner(System.in);
 
@@ -61,17 +50,26 @@ public class Menu {
             pressEnterToContinue();
         }
     }
+
     private static void printHeader() {
         System.out.println();
         System.out.println("=================================");
         System.out.println("        gym membership system");
         System.out.println("=================================");
     }
-    private static void printGoodbye() {
-        System.out.println();
-        System.out.println("Thanks  for using our gym membership system.");
-        System.out.println("bye bye!");
+
+    private static int readMenuChoice() {
+
+        int choice = readInt(" choose one of the options: ");
+
+        while (choice < 0 || choice > 12) {
+            System.out.println("please choose a number between 0 and 12 ");
+            choice = readInt("please choose one of the options: ");
+        }
+
+        return choice;
     }
+
     private static void printMenu() {
 
         String[] menuOptions = {
@@ -95,6 +93,12 @@ public class Menu {
         }
     }
 
+    private static void printGoodbye() {
+        System.out.println();
+        System.out.println("Thanks  for using our gym membership system.");
+        System.out.println("bye bye!");
+    }
+
     private static int readInt(String prompt) {
         System.out.print(prompt);
         while (!INPUT.hasNextInt()) {
@@ -113,5 +117,16 @@ public class Menu {
     private static String readString(String prompt) {
         System.out.print(prompt);
         return INPUT.nextLine().trim();
+    }
+
+    private static String readNonEmptyString(String prompt) {
+        String value = readString(prompt);
+
+        while (value.isEmpty()) {
+            System.out.println("Input cannot be empty!");
+            value = readString(prompt);
+        }
+
+        return value;
     }
 }
