@@ -4,12 +4,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataTest {
+    // To Clear the data after each test
     @BeforeEach
     void setUp() {
         Data.membersById.clear();
         Data.memberIdList.clear();
     }
 
+    // ====================== AddMember() Test Case =======================
     @Test
     void addMember() {
         //Arrange
@@ -33,8 +35,20 @@ class DataTest {
         assertEquals(true, member[Data.INDEX_ACTIVE]);
     }
 
+    // ====================== UpdateMemberInfo Test Case =======================
     @Test
     void updateMemberInfo() {
+        //Arrange
+        int id = Data.addMember("Brandon", Data.TYPE_MONTHLY);
+
+        //Act
+        boolean updated = Data.updateMemberInfo(id, "Brandon Aung", Data.TYPE_ANNUALLY);
+        Object[] member = Data.getMemberById(id);
+
+        //Assert
+        assertTrue(updated);
+        assertEquals("Brandon Aung", member[Data.INDEX_NAME]);
+        assertEquals(Data.TYPE_ANNUALLY, member[Data.INDEX_TYPE]);
     }
 
     @Test
