@@ -16,35 +16,54 @@ public class Menu {
             int choice = readMenuChoice();
 
             switch (choice) {
+
+                //Option 1
                 case Constants.ADD_MEMBER:
                     System.out.println("\nAdd member Selected\n");
                     handleAddMember();
                     break;
 
+                //Option 2
                 case Constants.UPDATE_MEMBER:
                     System.out.println("\nUpdate member selected\n");
                     handleUpdateMember();
                     break;
 
+                //Option 3
                 case Constants.CHECK_IN:
                     System.out.println("\nCheck in selected\n");
                     handleCheckIn();
                     break;
 
+                //Option 4
                 case Constants.PAYMENT:
                     System.out.println("\nPayment selected\n");
                     handlePayment();
                     break;
 
+                //Option 5
                 case Constants.TOGGLE_ACTIVE:
                     System.out.println("\nChange membership's status\n");
                     handleToggleActive();
                     break;
 
+                //Option 6
                 case Constants.VIEW_ALL:
                     System.out.println("\nView all members selected\n");
                     handleViewAllMembers();
                     break;
+
+                //Option 7
+                case Constants.VIEW_ONE:
+                    System.out.println("\nView one member by ID selected\n");
+                    handleViewOneMember();
+                    break;
+
+                //Option 8
+                //Option 9
+                //Option 10
+                //Option 11
+                //Option 12
 
                 case Constants.EXIT:
 
@@ -81,7 +100,7 @@ public class Menu {
                 "4)  Record a payment",
                 "5)  Change membership's active/inactive status",
                 "6)  View all the members",
-                "7)  View members by their ID",
+                "7)  View one member by ID",
                 "8)  Summary of total members and active members",
                 "9)  Summary of total revenue",
                 "10) Summary of top 5 visits",
@@ -333,5 +352,19 @@ public class Menu {
         for (Object[] member : members) {
             printMemberTableRow(member);
         }
+    }
+
+    private static void handleViewOneMember() {
+        System.out.println("=== View Member By ID ===");
+
+        int id = readInt("Enter member ID: ");
+        Object[] member = Data.getMemberById(id);
+
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        printOneMember(member);
     }
 }
