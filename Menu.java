@@ -68,6 +68,7 @@ public class Menu {
                 //Option 9
                 case Constants.SUMMARY_REVENUE:
                     System.out.println("\nSummary of total revenue selected\n");
+                    handleSummaryRevenue();
                     break;
 
                 //Option 10
@@ -392,5 +393,10 @@ public class Menu {
         System.out.println("=== Summary: Total Members and Active Members ===");
         System.out.println("Total members: " + Summaries.totalMembers());
         System.out.println("Active members: " + Summaries.activeMembers());
+    }
+
+    private static void handleSummaryRevenue() {
+        System.out.println("=== Summary: Total Revenue ===");
+        System.out.println("Total revenue collected: $" + String.format("%.2f", Summaries.totalRevenue()));
     }
 }
