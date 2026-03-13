@@ -101,8 +101,10 @@ public class Menu {
                     System.out.println("your option was invalid, please go again");
             }
 
-            System.out.println();
-            pressEnterToContinue();
+            if (running) {
+                System.out.println();
+                pressEnterToContinue();
+            }
         }
     }
 
