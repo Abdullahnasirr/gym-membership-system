@@ -60,10 +60,30 @@ public class Menu {
                     break;
 
                 //Option 8
+                case Constants.SUMMARY_COUNTS:
+                    System.out.println("\nSummary of total members and active members selected\n");
+                    handleSummaryCounts();
+                    break;
+
                 //Option 9
+                case Constants.SUMMARY_REVENUE:
+                    System.out.println("\nSummary of total revenue selected\n");
+                    break;
+
                 //Option 10
+                case Constants.SUMMARY_TOP5:
+                    System.out.println("\nSummary of top 5 visits selected\n");
+                    break;
+
                 //Option 11
+                case Constants.SUMMARY_INACTIVE:
+                    System.out.println("\nSummary of inactive or 0 visits selected\n");
+                    break;
+
                 //Option 12
+                case Constants.SUMMARY_AVG_BY_TYPE:
+                    System.out.println("\nSummary of average visits by type selected\n");
+                    break;
 
                 case Constants.EXIT:
 
@@ -366,5 +386,11 @@ public class Menu {
         }
 
         printOneMember(member);
+    }
+
+    private static void handleSummaryCounts() {
+        System.out.println("=== Summary: Total Members and Active Members ===");
+        System.out.println("Total members: " + Summaries.totalMembers());
+        System.out.println("Active members: " + Summaries.activeMembers());
     }
 }
