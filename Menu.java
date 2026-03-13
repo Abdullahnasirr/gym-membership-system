@@ -16,19 +16,23 @@ public class Menu {
 
             switch (choice) {
                 case Constants.ADD_MEMBER:
+                    System.out.println("\nAdd member Selected\n");
                     handleAddMember();
                     break;
 
                 case Constants.UPDATE_MEMBER:
+                    System.out.println("\nUpdate member selected\n");
                     handleUpdateMember();
                     break;
 
                 case Constants.CHECK_IN:
+                    System.out.println("\nCheck in selected\n");
                     handleCheckIn();
                     break;
 
                 case Constants.PAYMENT:
-                    System.out.println("payment selected");
+                    System.out.println("\nPayment selected\n");
+                    handlePayment();
                     break;
 
                 case Constants.VIEW_ALL:
@@ -256,6 +260,28 @@ public class Menu {
             Object[] member = Data.getMemberById(id);
             System.out.println("Check-in recorded successfully.");
             System.out.println("Total visits is now: " + member[Data.INDEX_VISITS]);
+        } else {
+            System.out.println("Member not found.");
+        }
+    }
+
+    private static void handlePayment() {
+        System.out.println("=== Record Payment ===");
+
+        int id = readInt("Enter member ID: ");
+        double amount = readDouble("Enter payment amount: ");
+
+        while (amount < 0) {
+            System.out.println("Payment amount cannot be negative.");
+            amount = readDouble("Enter payment amount: ");
+        }
+
+        boolean success = Data.recordPayment(id, amount);
+
+        if (success) {
+            Object[] member = Data.getMemberById(id);
+            System.out.println("Payment recorded successfully.");
+            System.out.println("Total paid is now: $" + String.format("%.2f", (Double) member[Data.INDEX_TOTAL_PAID]));
         } else {
             System.out.println("Member not found.");
         }
