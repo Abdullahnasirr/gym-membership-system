@@ -80,11 +80,13 @@ public class Menu {
                 //Option 11
                 case Constants.SUMMARY_INACTIVE:
                     System.out.println("\nSummary of inactive or 0 visits selected\n");
+                    handleSummaryInactiveOrZero();
                     break;
 
                 //Option 12
                 case Constants.SUMMARY_AVG_BY_TYPE:
                     System.out.println("\nSummary of average visits by type selected\n");
+                    handleSummaryAverageByType();
                     break;
 
                 case Constants.EXIT:
@@ -416,5 +418,21 @@ public class Menu {
         for (Object[] member : topMembers) {
             printMemberTableRow(member);
         }
+    }
+
+    private static void handleSummaryInactiveOrZero() {
+        System.out.println("=== Summary: Inactive Or Zero Visits ===");
+        System.out.println("Members who are inactive or have 0 visits: " + Summaries.inactiveOrZeroVisits());
+    }
+
+    private static void handleSummaryAverageByType() {
+        System.out.println("=== Summary: Average Visits By Membership Type ===");
+
+        System.out.println("Monthly average visits: " +
+                String.format("%.2f", Summaries.averageVisitsByType(Data.TYPE_MONTHLY)));
+        System.out.println("Quarterly average visits: " +
+                String.format("%.2f", Summaries.averageVisitsByType(Data.TYPE_QUARTERLY)));
+        System.out.println("Annually average visits: " +
+                String.format("%.2f", Summaries.averageVisitsByType(Data.TYPE_ANNUALLY)));
     }
 }
