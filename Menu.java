@@ -35,6 +35,11 @@ public class Menu {
                     handlePayment();
                     break;
 
+                case Constants.TOGGLE_ACTIVE:
+                    System.out.println("\n Change membership's status \n");
+                    handleToggleActive();
+                    break;
+
                 case Constants.VIEW_ALL:
                     System.out.println("view all members selected");
                     break;
@@ -67,19 +72,19 @@ public class Menu {
     private static void printMenu() {
 
         String[] menuOptions = {
-                "1) add a new member",
-                "2) add update a members info",
-                "3) record a members check in",
-                "4) record a payment",
-                "5) set a membership active or inactive",
-                "6) view all the members",
-                "7) view members by their ID",
-                "8) summary of total members and active members",
-                "9) summary of total revenue",
-                "10) summary of top 5 visits",
+                "1)  Add a new member",
+                "2)  Update a member's info",
+                "3)  Record a member's check in",
+                "4)  Record a payment",
+                "5)  Change membership's active/inactive status",
+                "6)  View all the members",
+                "7)  View members by their ID",
+                "8)  Summary of total members and active members",
+                "9)  Summary of total revenue",
+                "10) Summary of top 5 visits",
                 "11) Summary of inactive or 0 visits",
                 "12) Summary of average visits by type",
-                "0) Exit"
+                "0)  Exit"
         };
 
         for (String option : menuOptions) {
@@ -284,6 +289,29 @@ public class Menu {
             System.out.println("Total paid is now: $" + String.format("%.2f", (Double) member[Data.INDEX_TOTAL_PAID]));
         } else {
             System.out.println("Member not found.");
+        }
+    }
+
+    private static void handleToggleActive() {
+        System.out.println("=== Set Member's Active / Inactive Status ===");
+
+        int id = readInt("Enter member ID: ");
+        Object[] member = Data.getMemberById(id);
+
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        System.out.println("Current status: " + (((Boolean) member[Data.INDEX_ACTIVE]) ? "Active" : "Inactive"));
+        boolean newStatus = readBoolean("Set status to active? (yes/no): ");
+
+        boolean success = Data.setActiveStatus(id, newStatus);
+
+        if (success) {
+            System.out.println("Member status updated successfully.");
+        } else {
+            System.out.println("Status update failed.");
         }
     }
 }
