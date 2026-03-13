@@ -74,6 +74,7 @@ public class Menu {
                 //Option 10
                 case Constants.SUMMARY_TOP5:
                     System.out.println("\nSummary of top 5 visits selected\n");
+                    handleSummaryTopFive();
                     break;
 
                 //Option 11
@@ -398,5 +399,22 @@ public class Menu {
     private static void handleSummaryRevenue() {
         System.out.println("=== Summary: Total Revenue ===");
         System.out.println("Total revenue collected: $" + String.format("%.2f", Summaries.totalRevenue()));
+    }
+
+    private static void handleSummaryTopFive() {
+        System.out.println("=== Summary: Top 5 Members By Visits ===");
+
+        List<Object[]> topMembers = Summaries.topFiveByVisits();
+
+        if (topMembers.isEmpty()) {
+            System.out.println("No members found.");
+            return;
+        }
+
+        printMemberTableHeader();
+
+        for (Object[] member : topMembers) {
+            printMemberTableRow(member);
+        }
     }
 }
