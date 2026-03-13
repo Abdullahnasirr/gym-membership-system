@@ -16,11 +16,11 @@ public class Menu {
 
             switch (choice) {
                 case Constants.ADD_MEMBER:
-                    System.out.println("add member selected");
+                    handleAddMember();
                     break;
 
                 case Constants.UPDATE_MEMBER:
-                    System.out.println("update member selected");
+                    handleUpdateMember();
                     break;
 
                 case Constants.CHECK_IN:
@@ -218,5 +218,31 @@ public class Menu {
 
         System.out.println("Member added successfully.");
         System.out.println("Generated member ID: " + id);
+    }
+
+    private static void handleUpdateMember() {
+        System.out.println("=== Update Member Info ===");
+
+        int id = readInt("Enter member ID: ");
+        Object[] member = Data.getMemberById(id);
+
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        System.out.println("Current member info:");
+        printOneMember(member);
+
+        String newName = readNonEmptyString("Enter new member name: ");
+        String newType = readMembershipType();
+
+        boolean updated = Data.updateMemberInfo(id, newName, newType);
+
+        if (updated) {
+            System.out.println("Member information updated successfully.");
+        } else {
+            System.out.println("Update failed.");
+        }
     }
 }
