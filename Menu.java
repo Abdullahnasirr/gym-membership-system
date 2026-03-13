@@ -207,4 +207,16 @@ public class Menu {
     }
 
     // ==============================  Handle Methods  ===================================
+
+    private static void handleAddMember() {
+        System.out.println("=== Add New Member ===");
+
+        String name = readNonEmptyString("Enter member name: ");
+        String type = readMembershipType();
+
+        int id = Data.addMember(name, type);
+
+        System.out.println("Member added successfully.");
+        System.out.println("Generated member ID: " + id);
+    }
 }
