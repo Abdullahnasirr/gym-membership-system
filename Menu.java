@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -36,13 +37,15 @@ public class Menu {
                     break;
 
                 case Constants.TOGGLE_ACTIVE:
-                    System.out.println("\n Change membership's status \n");
+                    System.out.println("\nChange membership's status\n");
                     handleToggleActive();
                     break;
 
                 case Constants.VIEW_ALL:
-                    System.out.println("view all members selected");
+                    System.out.println("\nView all members selected\n");
+                    handleViewAllMembers();
                     break;
+
                 case Constants.EXIT:
 
                     running = false;
@@ -312,6 +315,23 @@ public class Menu {
             System.out.println("Member status updated successfully.");
         } else {
             System.out.println("Status update failed.");
+        }
+    }
+
+    private static void handleViewAllMembers() {
+        System.out.println("=== View All Members ===");
+
+        List<Object[]> members = Data.getAllMembers();
+
+        if (members.isEmpty()) {
+            System.out.println("No members found.");
+            return;
+        }
+
+        printMemberTableHeader();
+
+        for (Object[] member : members) {
+            printMemberTableRow(member);
         }
     }
 }
