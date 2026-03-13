@@ -24,7 +24,7 @@ public class Menu {
                     break;
 
                 case Constants.CHECK_IN:
-                    System.out.println("check in selected");
+                    handleCheckIn();
                     break;
 
                 case Constants.PAYMENT:
@@ -243,6 +243,21 @@ public class Menu {
             System.out.println("Member information updated successfully.");
         } else {
             System.out.println("Update failed.");
+        }
+    }
+
+    private static void handleCheckIn() {
+        System.out.println("=== Record Check-In ===");
+
+        int id = readInt("Enter member ID: ");
+        boolean success = Data.recordCheckIn(id);
+
+        if (success) {
+            Object[] member = Data.getMemberById(id);
+            System.out.println("Check-in recorded successfully.");
+            System.out.println("Total visits is now: " + member[Data.INDEX_VISITS]);
+        } else {
+            System.out.println("Member not found.");
         }
     }
 }
