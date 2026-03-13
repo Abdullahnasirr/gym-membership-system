@@ -94,6 +94,31 @@ public class Menu {
         INPUT.nextLine();
     }
 
+    private static void printOneMember(Object[] member) {
+        System.out.println("Member ID: " + member[Data.INDEX_ID]);
+        System.out.println("Name: " + member[Data.INDEX_NAME]);
+        System.out.println("Membership Type: " + member[Data.INDEX_TYPE]);
+        System.out.println("Visits: " + member[Data.INDEX_VISITS]);
+        System.out.println("Total Paid: $" + String.format("%.2f", (Double) member[Data.INDEX_TOTAL_PAID]));
+        System.out.println("Status: " + (((Boolean) member[Data.INDEX_ACTIVE]) ? "Active" : "Inactive"));
+    }
+
+    private static void printMemberTableHeader() {
+        System.out.printf("%-8s %-20s %-12s %-8s %-12s %-10s%n",
+                "ID", "Name", "Type", "Visits", "Total Paid", "Status");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    private static void printMemberTableRow(Object[] member) {
+        System.out.printf("%-8d %-20s %-12s %-8d $%-11.2f %-10s%n",
+                (Integer) member[Data.INDEX_ID],
+                (String) member[Data.INDEX_NAME],
+                (String) member[Data.INDEX_TYPE],
+                (Integer) member[Data.INDEX_VISITS],
+                (Double) member[Data.INDEX_TOTAL_PAID],
+                ((Boolean) member[Data.INDEX_ACTIVE]) ? "Active" : "Inactive");
+    }
+
     // ==============================  Read Methods ====================================
 
     private static int readInt(String prompt) {
@@ -180,4 +205,6 @@ public class Menu {
             return Data.TYPE_ANNUALLY;
         }
     }
+
+    // ==============================  Handle Methods  ===================================
 }
