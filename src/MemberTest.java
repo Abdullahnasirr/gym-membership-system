@@ -37,7 +37,7 @@ class MemberTest {
     @Test
     void testRecordCheckInIncreasesVisitCount() {
         // Arrange
-        Member member = new Member("M1001", "Brandon2", "Brandon2@email.com",
+        Member member = new Member("M1000", "Brandon", "Brandon@email.com",
                 "Calgary", "Quarterly");
 
         // Act
@@ -48,13 +48,22 @@ class MemberTest {
         assertEquals(2, member.getTotalVisits());
     }
 
+    /**
+     * Tests that recordPayment correctly adds to the total amount paid.
+     * Verifies that multiple payments are accumulated properly.
+     */
     @Test
     void testRecordPaymentAddsToTotalPaid() {
         // Arrange
+        Member member = new Member("M1000", "Brandon", "Brandon@email.com",
+                "Calgary", "Annually");
 
         // Act
+        member.recordPayment(25.0);
+        member.recordPayment(15.5);
 
         // Assert
+        assertEquals(40.5, member.getTotalPaid(), 0.0001);
     }
 
     @Test
