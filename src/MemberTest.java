@@ -105,13 +105,27 @@ class MemberTest {
         assertEquals(hash1, hash2);
     }
 
+    /**
+     * Tests that compareTo orders members by memberId.
+     * Verifies less than, greater than, and equal comparisons.
+     */
     @Test
     void testCompareToOrdersMembersByMemberId() {
         // Arrange
+        Member Brandon1 = new Member("M1001", "Brandon1", "Brandon1@email.com",
+                "Calgary", "Monthly");
+        Member Brandon2 = new Member("M1002", "Brandon2", "Brandon2@email.com",
+                "Calgary", "Monthly");
 
         // Act
+        int firstComparedToSecond = Brandon1.compareTo(Brandon2);
+        int secondComparedToFirst = Brandon2.compareTo(Brandon1);
+        int firstComparedToSameId = Brandon1.compareTo(Brandon1);
 
         // Assert
+        assertTrue(firstComparedToSecond < 0);
+        assertTrue(secondComparedToFirst > 0);
+        assertEquals(0, firstComparedToSameId);
     }
 
     @Test
