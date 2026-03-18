@@ -114,12 +114,44 @@ class GymSystemTest {
         assertEquals(75.5, totalPaid, 0.0001);
     }
 
+    /**
+     * Tests that setMemberActive updates the member's active status.
+     * Verifies that the status changes correctly.
+     */
     @Test
     void setMemberActiveChangesStatus() {
+        // Arrange
+        String id = gymSystem.generateMemberId();
+        Member member = new Member(id, "Brandon", "Brandon@email.com",
+                "Calgary", "Monthly");
+        gymSystem.addMember(member);
 
+        // Act
+        boolean result = gymSystem.setMemberActive(id, false);
+        boolean isActive = gymSystem.findMemberById(id).isActive();
+
+        // Assert
+        assertTrue(result);
+        assertFalse(isActive);
     }
 
+    /**
+     * Tests that getAllMembers returns all added members.
+     * Verifies that the size of the collection matches the number of members added.
+     */
     @Test
     void getAllMembersReturnsAllStoredMembers() {
+        // Arrange
+        String id1 = gymSystem.generateMemberId();
+        String id2 = gymSystem.generateMemberId();
+
+        gymSystem.addMember(new Member(id1, "One", "one@email.com", "A", "Monthly"));
+        gymSystem.addMember(new Member(id2, "Two", "two@email.com", "B", "Quarterly"));
+
+        // Act
+        int size = gymSystem.getAllMembers().size();
+
+        // Assert
+        assertEquals(2, size);
     }
 }
