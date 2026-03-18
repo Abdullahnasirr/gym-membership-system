@@ -44,8 +44,28 @@ class GymSystemTest {
         assertEquals(1, gymSystem.getTotalMembers());
     }
 
+    /**
+     * Tests that updateMemberInfo correctly updates a member's details.
+     * Verifies that name, contact, and address are changed.
+     */
     @Test
     void updateMemberInfoChangesStoredValues() {
+        // Arrange
+        String id = gymSystem.generateMemberId();
+        Member member = new Member(id, "Old Name", "old@email.com",
+                "Old Address", "Monthly");
+        gymSystem.addMember(member);
+
+        // Act
+        boolean updated = gymSystem.updateMemberInfo(id,
+                "New Name", "new@email.com", "New Address");
+        Member updatedMember = gymSystem.findMemberById(id);
+
+        // Assert
+        assertTrue(updated);
+        assertEquals("New Name", updatedMember.getFullName());
+        assertEquals("new@email.com", updatedMember.getPhoneOrEmail());
+        assertEquals("New Address", updatedMember.getAddress());
     }
 
     @Test
