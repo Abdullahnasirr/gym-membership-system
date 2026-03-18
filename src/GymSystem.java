@@ -112,4 +112,57 @@ public class GymSystem {
         usedContacts.add(contact);
         return true;
     }
+
+    /**
+     * Records a member check-in.
+     *
+     * @param memberId member ID
+     * @return true if member exists
+     */
+    public boolean recordCheckIn(String memberId) {
+        Member member = membersById.get(memberId);
+
+        if (member == null) {
+            return false;
+        }
+
+        member.recordCheckIn();
+        return true;
+    }
+
+    /**
+     * Records a payment for a member.
+     *
+     * @param memberId member ID
+     * @param amount payment amount
+     * @return true if member exists and amount is valid
+     */
+    public boolean recordPayment(String memberId, double amount) {
+        Member member = membersById.get(memberId);
+
+        if (member == null || amount < 0) {
+            return false;
+        }
+
+        member.recordPayment(amount);
+        return true;
+    }
+
+    /**
+     * Changes a member's active status.
+     *
+     * @param memberId member ID
+     * @param active new active status
+     * @return true if member exists
+     */
+    public boolean setMemberActive(String memberId, boolean active) {
+        Member member = membersById.get(memberId);
+
+        if (member == null) {
+            return false;
+        }
+
+        member.setActive(active);
+        return true;
+    }
 }
