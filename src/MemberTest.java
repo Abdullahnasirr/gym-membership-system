@@ -66,13 +66,23 @@ class MemberTest {
         assertEquals(40.5, member.getTotalPaid(), 0.0001);
     }
 
+    /**
+     * Tests that equals returns true for members with the same memberId.
+     * Verifies that memberId is used to determine equality.
+     */
     @Test
     void testEqualsReturnsTrueForSameMemberId() {
         // Arrange
+        Member noNameChange = new Member("M1000", "Brandon", "Brandon@email.com",
+                "Calgary", "Annually");
+        Member nameChanged = new Member("M1000", "Brandon Aung", "Brandon@email.com",
+                "Calgary", "Annually");
 
         // Act
+        boolean result = noNameChange.equals(nameChanged);
 
         // Assert
+        assertTrue(result);
     }
 
     @Test
