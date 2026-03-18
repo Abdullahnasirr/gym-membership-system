@@ -91,12 +91,32 @@ class GymSystemTest {
         assertEquals(2, visits);
     }
 
+    /**
+     * Tests that recordPayment correctly adds to a member's total paid.
+     * Verifies that multiple payments are accumulated properly.
+     */
     @Test
     void recordPaymentAddsToTotalPaid() {
+        // Arrange
+        String id = gymSystem.generateMemberId();
+        Member member = new Member(id, "Brandon", "Brandon@email.com",
+                "Calgary", "Annually");
+        gymSystem.addMember(member);
+
+        // Act
+        boolean firstPayment = gymSystem.recordPayment(id, 50.0);
+        boolean secondPayment = gymSystem.recordPayment(id, 25.5);
+        double totalPaid = gymSystem.findMemberById(id).getTotalPaid();
+
+        // Assert
+        assertTrue(firstPayment);
+        assertTrue(secondPayment);
+        assertEquals(75.5, totalPaid, 0.0001);
     }
 
     @Test
     void setMemberActiveChangesStatus() {
+
     }
 
     @Test
