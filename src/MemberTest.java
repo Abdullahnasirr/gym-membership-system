@@ -30,27 +30,66 @@ class MemberTest {
         assertEquals(membershipType, member.getMembershipType());
     }
 
+    /**
+     * Tests that calling recordCheckIn increases the total visit count.
+     * Verifies that multiple check-ins correctly update the visit total.
+     */
     @Test
     void testRecordCheckInIncreasesVisitCount() {
+        // Arrange
+        Member member = new Member("M1001", "Brandon2", "Brandon2@email.com",
+                "Calgary", "Quarterly");
+
+        // Act
+        member.recordCheckIn();
+        member.recordCheckIn();
+
+        // Assert
+        assertEquals(2, member.getTotalVisits());
     }
 
     @Test
     void testRecordPaymentAddsToTotalPaid() {
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     void testEqualsReturnsTrueForSameMemberId() {
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     void testHashCodeMatchesForEqualMembers() {
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     void testCompareToOrdersMembersByMemberId() {
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     void testSetActiveChangesMemberStatus() {
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 }
