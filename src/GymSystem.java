@@ -85,4 +85,31 @@ public class GymSystem {
     public int getTotalMembers() {
         return membersById.size();
     }
+
+    /**
+     * Updates editable member information.
+     *
+     * @param memberId member ID
+     * @param name new name
+     * @param contact new contact
+     * @param address new address
+     * @return true if update succeeded
+     */
+    public boolean updateMemberInfo(String memberId, String name, String contact, String address) {
+        Member member = membersById.get(memberId);
+
+        if (member == null) {
+            return false;
+        }
+
+        // Remove old contact before replacing it in the uniqueness "set".
+        usedContacts.remove(member.getPhoneOrEmail());
+
+        member.setFullName(name);
+        member.setPhoneOrEmail(contact);
+        member.setAddress(address);
+
+        usedContacts.add(contact);
+        return true;
+    }
 }
