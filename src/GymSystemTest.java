@@ -68,8 +68,27 @@ class GymSystemTest {
         assertEquals("New Address", updatedMember.getAddress());
     }
 
+    /**
+     * Tests that recordCheckIn increases the visit count for a member.
+     * Verifies that multiple check-ins are recorded correctly.
+     */
     @Test
     void recordCheckInIncreasesVisits() {
+        // Arrange
+        String id = gymSystem.generateMemberId();
+        Member member = new Member(id, "Brandon", "Brandon@email.com",
+                "Calgary", "Quarterly");
+        gymSystem.addMember(member);
+
+        // Act
+        boolean firstCheckIn = gymSystem.recordCheckIn(id);
+        boolean secondCheckIn = gymSystem.recordCheckIn(id);
+        int visits = gymSystem.findMemberById(id).getTotalVisits();
+
+        // Assert
+        assertTrue(firstCheckIn);
+        assertTrue(secondCheckIn);
+        assertEquals(2, visits);
     }
 
     @Test
