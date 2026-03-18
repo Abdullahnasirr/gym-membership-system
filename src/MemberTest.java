@@ -85,13 +85,24 @@ class MemberTest {
         assertTrue(result);
     }
 
+    /**
+     * Tests that hashCode is the same for members with the same memberId.
+     * Verifies consistency with equals method.
+     */
     @Test
     void testHashCodeMatchesForEqualMembers() {
         // Arrange
+        Member noNameChange = new Member("M1000", "Brandon", "Brandon@email.com",
+                "Calgary", "Annually");
+        Member nameChanged = new Member("M1000", "Brandon Aung", "Brandon@email.com",
+                "Calgary", "Annually");
 
         // Act
+        int hash1 = noNameChange.hashCode();
+        int hash2 = nameChanged.hashCode();
 
         // Assert
+        assertEquals(hash1, hash2);
     }
 
     @Test
