@@ -45,6 +45,7 @@ public class Member implements Comparable<Member> {
         this.phoneOrEmail = phoneOrEmail;
         this.address = address;
         this.membershipType = membershipType;
+        // New members always begin as active, no visits and no payments recorded.
         this.active = true;
         this.totalVisits = 0;
         this.totalPaid = 0.0;
@@ -152,6 +153,7 @@ public class Member implements Comparable<Member> {
         if (!(obj instanceof Member other)) {
             return false;
         }
+        // Equality is based on the unique member ID, not fields like name or address.
         return memberId.equals(other.memberId);
     }
 
