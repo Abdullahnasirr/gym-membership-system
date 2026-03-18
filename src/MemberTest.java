@@ -128,12 +128,20 @@ class MemberTest {
         assertEquals(0, firstComparedToSameId);
     }
 
+    /**
+     * Tests that setActive correctly updates the member's active status.
+     * Verifies that the status changes from active to inactive.
+     */
     @Test
     void testSetActiveChangesMemberStatus() {
         // Arrange
+        Member member = new Member("M1001", "Brandon1", "Brandon1@email.com",
+                "Calgary", "Monthly");
 
         // Act
+        member.setActive(false);
 
         // Assert
+        assertFalse(member.isActive());
     }
 }
