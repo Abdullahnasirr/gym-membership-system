@@ -4,6 +4,14 @@ import java.util.HashSet;
 
 /**
  * GymSystem.java
+ *
+ * CPSC 219 W26
+ * Demo 2 - Gym Membership System
+ *
+ * Name: Wai Yan Aung
+ *  Date: 18 March 2026
+ *  Tutorial: T05
+ *
  * Stores and manages all gym members in the object-oriented version
  * of the project.
  */

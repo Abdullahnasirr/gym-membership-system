@@ -1,5 +1,13 @@
 /**
  * Member.java
+ *
+ * CPSC 219 W26
+ * Demo 2 - Gym Membership System
+ *
+ * Name: Wai Yan Aung
+ *  Date: 18 March 2026
+ *  Tutorial: T05
+ *
  * Represents one gym member in the object-oriented version of the program.
  * This class replaces the old Object[] member record from Demo 1.
  */

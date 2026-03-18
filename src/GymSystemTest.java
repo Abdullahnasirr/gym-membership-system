@@ -5,6 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * GymSystemTest.java
+ *
+ * CPSC 219 W26
+ * Demo 2 - Gym Membership System
+ *
+ * Name: Wai Yan Aung
+ *  Date: 18 March 2026
+ *  Tutorial: T05
+ *
  * Unit tests for GymSystem methods.
  */
 class GymSystemTest {

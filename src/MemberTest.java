@@ -2,7 +2,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * MemberTest.java, JUnit tests for the Member class.
+ * MemberTest.java
+ *
+ * CPSC 219 W26
+ * Demo 2 - Gym Membership System
+ *
+ * Name: Wai Yan Aung
+ * Date: 18 March 2026
+ * Tutorial: T05
+ *
+ * JUnit tests for the Member class.
  */
 class MemberTest {
 
