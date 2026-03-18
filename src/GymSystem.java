@@ -173,4 +173,91 @@ public class GymSystem {
         member.setActive(active);
         return true;
     }
+
+    /**
+     * Counts active members in the system.
+     *
+     * @return number of active members
+     */
+    public int getActiveMembersCount() {
+        int count = 0;
+
+        for (Member member : membersById.values()) {
+            if (member.isActive()) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Calculates total revenue collected from all members.
+     *
+     * @return total revenue
+     */
+    public double getTotalRevenue() {
+        double total = 0.0;
+
+        for (Member member : membersById.values()) {
+            total += member.getTotalPaid();
+        }
+
+        return total;
+    }
+
+    /**
+     * Returns up to the top 5 members ranked by total visits.
+     *
+     * @return list of top members by visits
+     */
+    public ArrayList<Member> getTop5MembersByVisits() {
+        ArrayList<Member> members = getAllMembers();
+
+        members.sort((a, b) -> Integer.compare(b.getTotalVisits(), a.getTotalVisits()));
+
+        return new ArrayList<>(members.subList(0, Math.min(5, members.size())));
+    }
+
+    /**
+     * Returns members that are inactive or have zero visits.
+     *
+     * @return list of inactive or zero-visit members
+     */
+    public ArrayList<Member> getInactiveOrZeroVisitMembers() {
+        ArrayList<Member> result = new ArrayList<>();
+
+        for (Member member : membersById.values()) {
+            if (!member.isActive() || member.getTotalVisits() == 0) {
+                result.add(member);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Calculates average visits for active members of a given membership type.
+     *
+     * @param membershipType membership type to filter by
+     * @return average visits, or 0.0 if none match
+     */
+    public double getAverageVisitsByMembershipType(String membershipType) {
+        int totalVisits = 0;
+        int count = 0;
+
+        for (Member member : membersById.values()) {
+            if (member.isActive()
+                    && member.getMembershipType().equalsIgnoreCase(membershipType)) {
+                totalVisits += member.getTotalVisits();
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return 0.0;
+        }
+
+        return (double) totalVisits / count;
+    }
 }
