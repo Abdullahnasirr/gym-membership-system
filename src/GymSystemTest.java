@@ -265,4 +265,20 @@ class GymSystemTest {
         // Assert
         assertEquals(2, size);
     }
+
+    /**
+     * Tests that getActiveMembersCount returns the correct number of active members.
+     */
+    @Test
+    void getActiveMembersCountReturnsCorrectNumber() {
+
+        // Arrange
+        DemoData.load(gymSystem);
+
+        // Act
+        int activeCount = gymSystem.getActiveMembersCount();
+
+        // Assert
+        assertEquals(6, activeCount);
+    }
 }
