@@ -281,4 +281,20 @@ class GymSystemTest {
         // Assert
         assertEquals(6, activeCount);
     }
+
+    /**
+     * Tests that getTotalRevenue returns the correct total payment amount.
+     */
+    @Test
+    void getTotalRevenueReturnsCorrectAmount() {
+
+        // Arrange
+        DemoData.load(gymSystem);
+
+        // Act
+        double totalRevenue = gymSystem.getTotalRevenue();
+
+        // Assert
+        assertEquals(1850.0, totalRevenue, 0.0001);
+    }
 }
