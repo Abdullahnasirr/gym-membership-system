@@ -321,4 +321,20 @@ class GymSystemTest {
             assertTrue(current >= next);
         }
     }
+
+    /**
+     * Tests that getAverageVisitsByMembershipType returns 0.0 when no members match the type.
+     */
+    @Test
+    void getAverageVisitsByMembershipTypeReturnsZeroWhenNoMatches() {
+
+        // Arrange
+        String membershipType = "Weekly";
+
+        // Act
+        double average = gymSystem.getAverageVisitsByMembershipType(membershipType);
+
+        // Assert
+        assertEquals(0.0, average, 0.0001);
+    }
 }
