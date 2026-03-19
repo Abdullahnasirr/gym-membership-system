@@ -297,4 +297,28 @@ class GymSystemTest {
         // Assert
         assertEquals(1850.0, totalRevenue, 0.0001);
     }
+
+    /**
+     * Tests that getTop5MembersByVisits returns at most five members sorted by visits.
+     * Verifies that the list is not empty and is ordered in descending visit count.
+     */
+    @Test
+    void getTop5MembersByVisitsReturnsAtMostFiveMembersSortedByVisits() {
+
+        // Arrange
+        DemoData.load(gymSystem);
+
+        // Act
+        var topMembers = gymSystem.getTop5MembersByVisits();
+
+        // Assert
+        assertFalse(topMembers.isEmpty());
+        assertTrue(topMembers.size() <= 5);
+
+        for (int i = 0; i < topMembers.size() - 1; i++) {
+            int current = topMembers.get(i).getTotalVisits();
+            int next = topMembers.get(i + 1).getTotalVisits();
+            assertTrue(current >= next);
+        }
+    }
 }
