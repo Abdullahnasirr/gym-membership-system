@@ -40,7 +40,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Brandon", "brandon@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         gymSystem.addMember(member);
@@ -77,7 +77,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Old Name", "old@email.com",
-                "Old Address", "Monthly");
+                "Old Address", new MonthlyMembership("2026-03-19", "2026-04-19"));
         gymSystem.addMember(member);
 
         // Act
@@ -118,7 +118,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Brandon", "Brandon@email.com",
-                "Calgary", "Quarterly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         gymSystem.addMember(member);
 
         // Act
@@ -157,7 +157,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Brandon", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         gymSystem.addMember(member);
 
         // Act
@@ -197,7 +197,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Test", "test@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         gymSystem.addMember(member);
 
         // Act
@@ -218,7 +218,7 @@ class GymSystemTest {
         // Arrange
         String id = gymSystem.generateMemberId();
         Member member = new Member(id, "Brandon", "Brandon@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         gymSystem.addMember(member);
 
         // Act
@@ -256,8 +256,10 @@ class GymSystemTest {
         String id1 = gymSystem.generateMemberId();
         String id2 = gymSystem.generateMemberId();
 
-        gymSystem.addMember(new Member(id1, "One", "one@email.com", "A", "Monthly"));
-        gymSystem.addMember(new Member(id2, "Two", "two@email.com", "B", "Quarterly"));
+        gymSystem.addMember(new Member(id1, "One", "one@email.com", "A",
+                new MonthlyMembership("2026-03-19", "2026-04-19")));
+        gymSystem.addMember(new Member(id2, "Two", "two@email.com", "B",
+                new MonthlyMembership("2026-03-19", "2026-04-19")));
 
         // Act
         int size = gymSystem.getAllMembers().size();

@@ -19,21 +19,36 @@ public class DemoData {
      */
     public static void load(GymSystem gymSystem) {
         Member m1 = new Member(gymSystem.generateMemberId(), "Member 1",
-                "member1@email.com", "Calgary", "Monthly");
+                "member1@email.com", "Calgary",
+                new MonthlyMembership("2026-03-19", "2026-04-19"));
+
         Member m2 = new Member(gymSystem.generateMemberId(), "Member 2",
-                "member2@email.com", "Calgary", "Annually");
+                "member2@email.com", "Calgary",
+                new AnnualMembership("2026-03-19", "2027-03-19"));
+
         Member m3 = new Member(gymSystem.generateMemberId(), "Member 3",
-                "member3@email.com", "Calgary", "Quarterly");
+                "member3@email.com", "Calgary",
+                new QuarterlyMembership("2026-03-19", "2026-06-19"));
+
         Member m4 = new Member(gymSystem.generateMemberId(), "Member 4",
-                "member4@email.com", "Calgary", "Monthly");
+                "member4@email.com", "Calgary",
+                new MonthlyMembership("2026-03-19", "2026-04-19"));
+
         Member m5 = new Member(gymSystem.generateMemberId(), "Member 5",
-                "member5@email.com", "Calgary", "Annually");
+                "member5@email.com", "Calgary",
+                new AnnualMembership("2026-03-19", "2027-03-19"));
+
         Member m6 = new Member(gymSystem.generateMemberId(), "Member 6",
-                "member6@email.com", "Calgary", "Quarterly");
+                "member6@email.com", "Calgary",
+                new QuarterlyMembership("2026-03-19", "2026-06-19"));
+
         Member m7 = new Member(gymSystem.generateMemberId(), "Member 7",
-                "member7@email.com", "Calgary", "Monthly");
+                "member7@email.com", "Calgary",
+                new MonthlyMembership("2026-03-19", "2026-04-19"));
+
         Member m8 = new Member(gymSystem.generateMemberId(), "Member 8",
-                "member8@email.com", "Calgary", "Annually");
+                "member8@email.com", "Calgary",
+                new AnnualMembership("2026-03-19", "2027-03-19"));
 
         gymSystem.addMember(m1);
         gymSystem.addMember(m2);

@@ -26,17 +26,16 @@ class MemberTest {
         String fullName = "Brandon";
         String phoneOrEmail = "brandon@gmail.com";
         String address = "Calgary";
-        String membershipType = "Monthly";
+        Membership membership = new MonthlyMembership("2026-03-19", "2026-04-19");
 
         // Act
-        Member member = new Member(memberId, fullName, phoneOrEmail, address, membershipType);
+        Member member = new Member(memberId, fullName, phoneOrEmail, address, membership);
 
         // Assert
         assertEquals(memberId, member.getMemberId());
         assertEquals(fullName, member.getFullName());
         assertEquals(phoneOrEmail, member.getPhoneOrEmail());
         assertEquals(address, member.getAddress());
-        assertEquals(membershipType, member.getMembershipType());
     }
 
     /**
@@ -47,7 +46,7 @@ class MemberTest {
     void testRecordCheckInIncreasesVisitCount() {
         // Arrange
         Member member = new Member("M1000", "Brandon", "Brandon@email.com",
-                "Calgary", "Quarterly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         member.recordCheckIn();
@@ -65,7 +64,7 @@ class MemberTest {
     void testRecordPaymentAddsToTotalPaid() {
         // Arrange
         Member member = new Member("M1000", "Brandon", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         member.recordPayment(25.0);
@@ -83,9 +82,9 @@ class MemberTest {
     void testEqualsReturnsTrueForSameMemberId() {
         // Arrange
         Member noNameChange = new Member("M1000", "Brandon", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         Member nameChanged = new Member("M1000", "Brandon Aung", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         boolean result = noNameChange.equals(nameChanged);
@@ -102,9 +101,9 @@ class MemberTest {
     void testHashCodeMatchesForEqualMembers() {
         // Arrange
         Member noNameChange = new Member("M1000", "Brandon", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         Member nameChanged = new Member("M1000", "Brandon Aung", "Brandon@email.com",
-                "Calgary", "Annually");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         int hash1 = noNameChange.hashCode();
@@ -122,9 +121,9 @@ class MemberTest {
     void testCompareToOrdersMembersByMemberId() {
         // Arrange
         Member Brandon1 = new Member("M1001", "Brandon1", "Brandon1@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
         Member Brandon2 = new Member("M1002", "Brandon2", "Brandon2@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         int firstComparedToSecond = Brandon1.compareTo(Brandon2);
@@ -145,7 +144,7 @@ class MemberTest {
     void testSetActiveChangesMemberStatus() {
         // Arrange
         Member member = new Member("M1001", "Brandon1", "Brandon1@email.com",
-                "Calgary", "Monthly");
+                "Calgary", new MonthlyMembership("2026-03-19", "2026-04-19"));
 
         // Act
         member.setActive(false);

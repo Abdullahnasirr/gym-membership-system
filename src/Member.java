@@ -28,8 +28,8 @@ public class Member implements Comparable<Member> {
     /** Whether the membership is currently active. */
     private boolean active;
 
-    /** Temporary membership label until full Membership hierarchy is connected. */
-    private String membershipType;
+    /** Membership object associated with this member. */
+    private Membership membership;
 
     /** Total number of visits recorded for this member. */
     private int totalVisits;
@@ -44,15 +44,15 @@ public class Member implements Comparable<Member> {
      * @param fullName member full name
      * @param phoneOrEmail contact info
      * @param address address
-     * @param membershipType membership type label
+     * @param membership membership type label
      */
     public Member(String memberId, String fullName, String phoneOrEmail,
-                  String address, String membershipType) {
+                  String address, Membership membership) {
         this.memberId = memberId;
         this.fullName = fullName;
         this.phoneOrEmail = phoneOrEmail;
         this.address = address;
-        this.membershipType = membershipType;
+        this.membership = membership;
         // New members always begin as active, no visits and no payments recorded.
         this.active = true;
         this.totalVisits = 0;
@@ -80,7 +80,11 @@ public class Member implements Comparable<Member> {
     }
 
     public String getMembershipType() {
-        return membershipType;
+        return membership.getMembershipType();
+    }
+
+    public Membership getMembership() {
+        return membership;
     }
 
     public int getTotalVisits() {
@@ -107,8 +111,8 @@ public class Member implements Comparable<Member> {
         this.active = active;
     }
 
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 
     /**
@@ -140,7 +144,7 @@ public class Member implements Comparable<Member> {
                 fullName,
                 phoneOrEmail,
                 address,
-                membershipType,
+                membership.getMembershipType(),
                 totalVisits,
                 totalPaid,
                 active ? "Active" : "Inactive"
