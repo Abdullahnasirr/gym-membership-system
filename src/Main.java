@@ -12,10 +12,20 @@
  */
 public class Main {
     public static void main(String[] args) {
+
         GymSystem gymSystem = new GymSystem();
 
-        DemoData.load();
+        // Temporary Demo 2 flow:
+        // load sample data into the OO backend
+        DemoData.load(gymSystem);
 
-        Menu.start();
+        // TODO:
+        // Connect Menu/GymConsoleUI to this gymSystem object.
+        // Example future flow:
+        // GymConsoleUI ui = new GymConsoleUI(gymSystem);
+        // ui.start();
+
+        System.out.println("GymSystem initialized with " +
+                gymSystem.getTotalMembers() + " demo members.");
     }
 }
