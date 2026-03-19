@@ -17,6 +17,10 @@ import java.util.HashSet;
  */
 public class GymSystem {
 
+    public static final String TYPE_MONTHLY = "Monthly";
+    public static final String TYPE_QUARTERLY = "Quarterly";
+    public static final String TYPE_ANNUALLY = "Annually";
+
     /** Lookup structure for members by unique member ID. */
     private final HashMap<String, Member> membersById;
 
