@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -68,6 +69,7 @@ public class GymSystem {
     public void addMember(Member member) {
         membersById.put(member.getMemberId(), member);
         usedContacts.add(member.getPhoneOrEmail());
+        updateNextMemberNumberFromId(member.getMemberId());
     }
 
     /**
@@ -86,7 +88,9 @@ public class GymSystem {
      * @return all stored members
      */
     public ArrayList<Member> getAllMembers() {
-        return new ArrayList<>(membersById.values());
+        ArrayList<Member> members = new ArrayList<>(membersById.values());
+        Collections.sort(members);
+        return members;
     }
 
     /**
@@ -263,5 +267,23 @@ public class GymSystem {
         }
 
         return (double) totalVisits / count;
+    }
+
+    public void clearAllData() {
+        membersById.clear();
+        usedContacts.clear();
+        nextMemberNumber = 1000;
+    }
+
+    private void updateNextMemberNumberFromId(String memberId) {
+        if (memberId != null && memberId.startsWith("M")) {
+            try {
+                int numericPart = Integer.parseInt(memberId.substring(1));
+                if (numericPart >= nextMemberNumber) {
+                    nextMemberNumber = numericPart + 1;
+                }
+            } catch (NumberFormatException e) {// Ignore bad ID format
+            }
+        }
     }
 }
