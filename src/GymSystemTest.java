@@ -53,6 +53,22 @@ class GymSystemTest {
     }
 
     /**
+     * Tests that findMemberById returns null when the member does not exist.
+     */
+    @Test
+    void findMemberByIdReturnsNullWhenMissing() {
+
+        // Arrange
+        String invalidId = "M9999";
+
+        // Act
+        Member result = gymSystem.findMemberById(invalidId);
+
+        // Assert
+        assertNull(result);
+    }
+
+    /**
      * Tests that updateMemberInfo correctly updates a member's details.
      * Verifies that name, contact, and address are changed.
      */
@@ -74,6 +90,23 @@ class GymSystemTest {
         assertEquals("New Name", updatedMember.getFullName());
         assertEquals("new@email.com", updatedMember.getPhoneOrEmail());
         assertEquals("New Address", updatedMember.getAddress());
+    }
+
+    /**
+     * Tests that updateMemberInfo returns false when the member does not exist.
+     */
+    @Test
+    void updateMemberInfoReturnsFalseWhenMemberDoesNotExist() {
+
+        // Arrange
+        String invalidId = "M9999";
+
+        // Act
+        boolean updated = gymSystem.updateMemberInfo(invalidId,
+                "Name", "contact@email.com", "Address");
+
+        // Assert
+        assertFalse(updated);
     }
 
     /**
@@ -100,6 +133,22 @@ class GymSystemTest {
     }
 
     /**
+     * Tests that recordCheckIn returns false for an invalid memberId.
+     */
+    @Test
+    void recordCheckInReturnsFalseForInvalidMemberId() {
+
+        // Arrange
+        String invalidId = "M9999";
+
+        // Act
+        boolean result = gymSystem.recordCheckIn(invalidId);
+
+        // Assert
+        assertFalse(result);
+    }
+
+    /**
      * Tests that recordPayment correctly adds to a member's total paid.
      * Verifies that multiple payments are accumulated properly.
      */
@@ -123,6 +172,44 @@ class GymSystemTest {
     }
 
     /**
+     * Tests that recordPayment returns false for an invalid memberId.
+     */
+    @Test
+    void recordPaymentReturnsFalseForInvalidMemberId() {
+
+        // Arrange
+        String invalidId = "M9999";
+
+        // Act
+        boolean result = gymSystem.recordPayment(invalidId, 50.0);
+
+        // Assert
+        assertFalse(result);
+    }
+
+    /**
+     * Tests that recordPayment returns false for a negative payment amount.
+     * Verifies that totalPaid remains unchanged.
+     */
+    @Test
+    void recordPaymentReturnsFalseForNegativeAmount() {
+
+        // Arrange
+        String id = gymSystem.generateMemberId();
+        Member member = new Member(id, "Test", "test@email.com",
+                "Calgary", "Monthly");
+        gymSystem.addMember(member);
+
+        // Act
+        boolean result = gymSystem.recordPayment(id, -10.0);
+        double totalPaid = gymSystem.findMemberById(id).getTotalPaid();
+
+        // Assert
+        assertFalse(result);
+        assertEquals(0.0, totalPaid, 0.0001);
+    }
+
+    /**
      * Tests that setMemberActive updates the member's active status.
      * Verifies that the status changes correctly.
      */
@@ -141,6 +228,22 @@ class GymSystemTest {
         // Assert
         assertTrue(result);
         assertFalse(isActive);
+    }
+
+    /**
+     * Tests that setMemberActive returns false for an invalid memberId.
+     */
+    @Test
+    void setMemberActiveReturnsFalseForInvalidMemberId() {
+
+        // Arrange
+        String invalidId = "M9999";
+
+        // Act
+        boolean result = gymSystem.setMemberActive(invalidId, false);
+
+        // Assert
+        assertFalse(result);
     }
 
     /**
