@@ -1,4 +1,5 @@
 package gymsystem;
+import java.time.LocalDate;
 
 /**
  * GymSystem.Member.java
@@ -190,5 +191,26 @@ public class Member implements Comparable<Member> {
     @Override
     public int compareTo(Member other) {
         return this.memberId.compareTo(other.memberId);
+    }
+
+    /**
+     * Checks whether the membership has expired by comparing today's date
+     * with the membership end date.
+     *
+     * @return true if today's date is after the membership end date, false otherwise.
+     */
+    public boolean isMembershipExpired() {
+        LocalDate today = LocalDate.now();
+        LocalDate membershipEndDate = LocalDate.parse(membership.getEndDate());
+        return today.isAfter(membershipEndDate);
+    }
+
+    /**
+     * Refreshes the active status by setting it to false when the membership has expired.
+     */
+    public void refreshActiveStatus() {
+        if (isMembershipExpired()) {
+            active = false;
+        }
     }
 }
