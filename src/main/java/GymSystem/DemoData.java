@@ -1,52 +1,54 @@
+package GymSystem;
+
 /**
- * DemoData.java
+ * GymSystem.DemoData.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  * Date: 18 March 2026
  * Tutorial: T05
  *
- * Loads sample members into the object-oriented GymSystem.
+ * Loads sample members into the object-oriented GymSystem.GymSystem.
  */
 public class DemoData {
 
     /**
-     * Loads sample data into the provided GymSystem instance.
+     * Loads sample data into the provided GymSystem.GymSystem instance.
      *
      * @param gymSystem system to populate with sample members
      */
     public static void load(GymSystem gymSystem) {
-        Member m1 = new Member(gymSystem.generateMemberId(), "Member 1",
+        Member m1 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 1",
                 "member1@email.com", "Calgary",
                 new MonthlyMembership("2026-03-19", "2026-04-19"));
 
-        Member m2 = new Member(gymSystem.generateMemberId(), "Member 2",
+        Member m2 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 2",
                 "member2@email.com", "Calgary",
                 new AnnualMembership("2026-03-19", "2027-03-19"));
 
-        Member m3 = new Member(gymSystem.generateMemberId(), "Member 3",
+        Member m3 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 3",
                 "member3@email.com", "Calgary",
                 new QuarterlyMembership("2026-03-19", "2026-06-19"));
 
-        Member m4 = new Member(gymSystem.generateMemberId(), "Member 4",
+        Member m4 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 4",
                 "member4@email.com", "Calgary",
                 new MonthlyMembership("2026-03-19", "2026-04-19"));
 
-        Member m5 = new Member(gymSystem.generateMemberId(), "Member 5",
+        Member m5 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 5",
                 "member5@email.com", "Calgary",
                 new AnnualMembership("2026-03-19", "2027-03-19"));
 
-        Member m6 = new Member(gymSystem.generateMemberId(), "Member 6",
+        Member m6 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 6",
                 "member6@email.com", "Calgary",
                 new QuarterlyMembership("2026-03-19", "2026-06-19"));
 
-        Member m7 = new Member(gymSystem.generateMemberId(), "Member 7",
+        Member m7 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 7",
                 "member7@email.com", "Calgary",
                 new MonthlyMembership("2026-03-19", "2026-04-19"));
 
-        Member m8 = new Member(gymSystem.generateMemberId(), "Member 8",
+        Member m8 = new Member(gymSystem.generateMemberId(), "GymSystem.Member 8",
                 "member8@email.com", "Calgary",
                 new AnnualMembership("2026-03-19", "2027-03-19"));
 

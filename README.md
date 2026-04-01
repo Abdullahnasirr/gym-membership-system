@@ -1,8 +1,8 @@
-# Gym Membership System (CPSC 219 Demo 2)
+# Gym GymSystem.Membership System (CPSC 219 Demo 2)
 
 ## Demo2 Overview
 
-This project is an object-oriented Gym Membership Management System developed for **CPSC 219 Demo 2**.
+This project is an object-oriented Gym GymSystem.Membership Management System developed for **CPSC 219 Demo 2**.
 
 The system allows user to:
 
@@ -27,34 +27,34 @@ The system follows a **layered design**:
 
 ### 1. Core Logic
 
-* `GymSystem` → manages all members and operations
-* `Member` → represents a single gym member
+* `GymSystem.GymSystem` → manages all members and operations
+* `GymSystem.Member` → represents a single gym member
 
-### 2. Object-Oriented Data Model
+### 2. Object-Oriented GymSystem.Data Model
 
-* `Membership` (abstract class)
+* `GymSystem.Membership` (abstract class)
 
-    * `MonthlyMembership`
-    * `QuarterlyMembership`
-    * `AnnualMembership`
+    * `GymSystem.MonthlyMembership`
+    * `GymSystem.QuarterlyMembership`
+    * `GymSystem.AnnualMembership`
 
-* `Payment` → represents a payment record
+* `GymSystem.Payment` → represents a payment record
 
-* `CheckIn` → represents a visit record
+* `GymSystem.CheckIn` → represents a visit record
 
 ### 3. User Interface
 
-* `GymConsoleUI` → handles all user interaction (menu, input/output)
+* `GymSystem.GymConsoleUI` → handles all user interaction (menu, input/output)
 
 ### 4. File Management
 
-* `GymFileManager` → handles CSV saving and loading
+* `GymSystem.GymFileManager` → handles CSV saving and loading
 
 ---
 
 ## Features
 
-### Member Management
+### GymSystem.Member Management
 
 * Add new members with auto-generated IDs
 * Update member information
@@ -66,7 +66,7 @@ The system follows a **layered design**:
 * Record payments
 * Track total visits and total paid
 
-### Summaries
+### GymSystem.Summaries
 
 * Total members and active members
 * Total revenue
@@ -91,11 +91,11 @@ id,name,contact,address,type,visits,totalPaid,active
 
 JUnit tests are implemented for core logic classes:
 
-* `MemberTest` → tests member behavior (visits, payments, equals, compareTo)
-* `GymSystemTest` → tests system operations and summaries
-* `MembershipTest` → tests membership types
-* `PaymentTest` → tests payment logic
-* `CheckInTest` → tests check-in functionality
+* `GymSystem.MemberTest` → tests member behavior (visits, payments, equals, compareTo)
+* `GymSystem.GymSystemTest` → tests system operations and summaries
+* `GymSystem.MembershipTest` → tests membership types
+* `GymSystem.PaymentTest` → tests payment logic
+* `GymSystem.CheckInTest` → tests check-in functionality
 
 Tests follow the **AAA pattern (Arrange – Act – Assert)**.
 
@@ -105,11 +105,11 @@ Tests follow the **AAA pattern (Arrange – Act – Assert)**.
 
 ### Encapsulation
 
-* Private fields with getters/setters in `Member` and `GymSystem`
+* Private fields with getters/setters in `GymSystem.Member` and `GymSystem.GymSystem`
 
 ### Inheritance
 
-* `Membership` is an abstract class extended by:
+* `GymSystem.Membership` is an abstract class extended by:
 
     * Monthly
     * Quarterly
@@ -121,7 +121,7 @@ Tests follow the **AAA pattern (Arrange – Act – Assert)**.
 
 ### Comparable / equals / hashCode
 
-* `Member` implements `Comparable<Member>` (sorted by memberId)
+* `GymSystem.Member` implements `Comparable<GymSystem.Member>` (sorted by memberId)
 * `equals()` and `hashCode()` based on unique member ID
 
 ---
@@ -131,13 +131,13 @@ Tests follow the **AAA pattern (Arrange – Act – Assert)**.
 ### Option 1: Run with demo data
 
 ```
-Run Main.java
+Run GymSystem.Main.java
 ```
 
 ### Option 2: Run with CSV file
 
 ```
-java Main DemoCsv.csv
+java GymSystem.Main DemoCsv.csv
 ```
 
 If file loading fails, the system will fall back to demo data.
@@ -147,24 +147,24 @@ If file loading fails, the system will fall back to demo data.
 ## File Structure
 
 ```
-Main.java
-GymSystem.java
-Member.java
-Membership.java
-MonthlyMembership.java
-QuarterlyMembership.java
-AnnualMembership.java
-Payment.java
-CheckIn.java
-GymConsoleUI.java
-GymFileManager.java
+GymSystem.Main.java
+GymSystem.GymSystem.java
+GymSystem.Member.java
+GymSystem.Membership.java
+GymSystem.MonthlyMembership.java
+GymSystem.QuarterlyMembership.java
+GymSystem.AnnualMembership.java
+GymSystem.Payment.java
+GymSystem.CheckIn.java
+GymSystem.GymConsoleUI.java
+GymSystem.GymFileManager.java
 
 Tests:
-MemberTest.java
-GymSystemTest.java
-MembershipTest.java
-PaymentTest.java
-CheckInTest.java
+GymSystem.MemberTest.java
+GymSystem.GymSystemTest.java
+GymSystem.MembershipTest.java
+GymSystem.PaymentTest.java
+GymSystem.CheckInTest.java
 ```
 
 ---

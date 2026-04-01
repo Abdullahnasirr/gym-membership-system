@@ -1,4 +1,4 @@
-// Abstract parent class for all membership types.
+package GymSystem;// Abstract parent class for all membership types.
 // @author Ethan Chiu
 
 public abstract class Membership {

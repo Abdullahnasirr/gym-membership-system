@@ -1,16 +1,18 @@
+package GymSystem;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Data {
-    // ====================== Data Storage Structures =======================
+    // ====================== GymSystem.Data Storage Structures =======================
     // Key: member ID
     // Value: Object[] containing member data
     public static final HashMap<Integer, Object[]> membersById = new HashMap<>();
 
     public static final ArrayList<Integer> memberIdList = new ArrayList<>();
 
-    // ====================== Object[] Index Constants =======================
+    // ====================== Object[] Index GymSystem.Constants =======================
 
     public static final int INDEX_ID = 0;
     public static final int INDEX_NAME = 1;
@@ -19,7 +21,7 @@ public class Data {
     public static final int INDEX_TOTAL_PAID = 4;
     public static final int INDEX_ACTIVE = 5;
 
-    // ===================== Membership Type Constants ========================
+    // ===================== GymSystem.Membership Type GymSystem.Constants ========================
 
     public static final String TYPE_MONTHLY = "Monthly";
     public static final String TYPE_QUARTERLY = "Quarterly";
@@ -41,7 +43,7 @@ public class Data {
         return nextId++;
     }
 
-    // ===================== Option 1 - Add Member ========================
+    // ===================== Option 1 - Add GymSystem.Member ========================
 
     public static int addMember(String name, String type) {
 
@@ -70,7 +72,7 @@ public class Data {
 
     }
 
-    // ===================== Option 2 - Update Member ========================
+    // ===================== Option 2 - Update GymSystem.Member ========================
 
     public static boolean updateMemberInfo(int id, String newName, String newType) {
 
@@ -92,7 +94,7 @@ public class Data {
         Object[] member = membersById.get(id);
 
         if (member == null) {
-            return false; // Member not found
+            return false; // GymSystem.Member not found
         }
 
         int visits = (Integer) member[INDEX_VISITS];
@@ -101,14 +103,14 @@ public class Data {
         return true;
     }
 
-    // ===================== Option 4 - Record Payment ========================
+    // ===================== Option 4 - Record GymSystem.Payment ========================
 
     public static boolean recordPayment(int id, double amount) {
 
         Object[] member = membersById.get(id);
 
         if (member == null) {
-            return false; // Member not found
+            return false; // GymSystem.Member not found
         }
 
         double currentTotal = (Double) member[INDEX_TOTAL_PAID];
@@ -124,7 +126,7 @@ public class Data {
         Object[] member = membersById.get(id);
 
         if (member == null) {
-            return false; // Member not found
+            return false; // GymSystem.Member not found
         }
 
         member[INDEX_ACTIVE] = status;
@@ -147,7 +149,7 @@ public class Data {
         return allMembers;
     }
 
-// ===================== Option 7 - Lookup Member By ID ========================
+// ===================== Option 7 - Lookup GymSystem.Member By ID ========================
 
     public static Object[] getMemberById(int id) {
         return membersById.get(id); // Returns null if not found

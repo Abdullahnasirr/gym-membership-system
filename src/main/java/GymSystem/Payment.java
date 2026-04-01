@@ -1,3 +1,5 @@
+package GymSystem;
+
 // Represents one payment made by a member.
 // @author Ethan Chiu
 public class Payment {
@@ -27,7 +29,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment Amount: $" + String.format("%.2f", amount) +
+        return "GymSystem.Payment Amount: $" + String.format("%.2f", amount) +
                 ", Date: " + paymentDate;
     }
 }

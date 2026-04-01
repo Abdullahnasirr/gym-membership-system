@@ -1,4 +1,4 @@
-// Represents one member check-in.
+package GymSystem;// Represents one member check-in.
 // @author Ethan Chiu
 
 public class CheckIn {

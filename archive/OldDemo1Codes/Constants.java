@@ -1,3 +1,5 @@
+package GymSystem;
+
 public class Constants {
     public static final int EXIT = 0;
     public static final int ADD_MEMBER = 1;

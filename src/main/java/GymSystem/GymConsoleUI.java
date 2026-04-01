@@ -1,3 +1,5 @@
+package GymSystem;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -69,7 +71,7 @@ public class GymConsoleUI {
     }
 
     public void showMainMenu() {
-        System.out.println("\n=== Gym Membership System ===");
+        System.out.println("\n=== Gym GymSystem.Membership System ===");
         System.out.println("1) Add member");
         System.out.println("2) Update member info");
         System.out.println("3) Record member check-in");
@@ -112,7 +114,7 @@ public class GymConsoleUI {
 
         Member member = new Member(memberId, fullName, phoneOrEmail, address, membership);
 
-        System.out.println("Member added successfully.");
+        System.out.println("GymSystem.Member added successfully.");
         System.out.println("New member ID: " + memberId);
     }
 
@@ -125,9 +127,9 @@ public class GymConsoleUI {
         boolean updated = gymSystem.updateMemberInfo(memberId, fullName, phoneOrEmail, address);
 
         if (updated) {
-            System.out.println("Member updated successfully.");
+            System.out.println("GymSystem.Member updated successfully.");
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
@@ -138,7 +140,7 @@ public class GymConsoleUI {
         if (success) {
             System.out.println("Check-in recorded successfully.");
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
@@ -149,9 +151,9 @@ public class GymConsoleUI {
         boolean success = gymSystem.recordPayment(memberId, amount);
 
         if (success) {
-            System.out.println("Payment recorded successfully.");
+            System.out.println("GymSystem.Payment recorded successfully.");
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
@@ -163,9 +165,9 @@ public class GymConsoleUI {
         boolean success = gymSystem.setMemberActive(memberId, active);
 
         if (success) {
-            System.out.println("Member active status updated.");
+            System.out.println("GymSystem.Member active status updated.");
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
@@ -188,7 +190,7 @@ public class GymConsoleUI {
         Member member = gymSystem.findMemberById(memberId);
 
         if (member == null) {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         } else {
             System.out.println(member);
         }
@@ -254,7 +256,7 @@ public class GymConsoleUI {
         boolean success = GymFileManager.loadFromCsv(fileName, gymSystem);
 
         if (success) {
-            System.out.println("Data loaded successfully.");
+            System.out.println("GymSystem.Data loaded successfully.");
         } else {
             System.out.println("Failed to load data from file.");
         }
@@ -265,7 +267,7 @@ public class GymConsoleUI {
         boolean success = GymFileManager.saveToCsv(fileName, gymSystem);
 
         if (success) {
-            System.out.println("Data saved successfully.");
+            System.out.println("GymSystem.Data saved successfully.");
         } else {
             System.out.println("Failed to save data to file.");
         }
