@@ -113,6 +113,7 @@ public class GymConsoleUI {
         }
 
         Member member = new Member(memberId, fullName, phoneOrEmail, address, membership);
+        gymSystem.addMember(member);
 
         System.out.println("GymSystem.Member added successfully.");
         System.out.println("New member ID: " + memberId);
