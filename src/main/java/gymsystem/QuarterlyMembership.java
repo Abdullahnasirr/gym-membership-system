@@ -1,4 +1,4 @@
-package GymSystem;// Represents a quarterly membership
+package gymsystem;// Represents a quarterly membership
 // @author Ethan Chiu
 
 public class QuarterlyMembership extends Membership {

@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

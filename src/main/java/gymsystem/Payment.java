@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 // Represents one payment made by a member.
 // @author Ethan Chiu

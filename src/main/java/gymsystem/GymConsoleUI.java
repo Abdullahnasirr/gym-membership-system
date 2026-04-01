@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

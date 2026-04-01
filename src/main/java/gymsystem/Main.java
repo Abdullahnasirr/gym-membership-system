@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 /**
  * GymSystem.Main.java
