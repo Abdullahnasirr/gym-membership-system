@@ -141,16 +141,25 @@ public class Member implements Comparable<Member> {
      */
     @Override
     public String toString() {
+        refreshActiveStatus();
+
+        String statusText = active ? "Active" : "Inactive";
+        if (isMembershipExpired()) {
+            statusText += " (Expired)";
+        }
+
         return String.format(
-                "GymSystem.Member ID: %s | Name: %s | Contact: %s | Address: %s | GymSystem.Membership Type: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
+                "Member ID: %s | Name: %s | Contact: %s | Address: %s | Membership: %s | Start Date: %s | End Date: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
                 memberId,
                 fullName,
                 phoneOrEmail,
                 address,
                 membership.getMembershipType(),
-                totalVisits,
-                totalPaid,
-                active ? "Active" : "Inactive"
+                membership.getStartDate(),
+                membership.getEndDate(),
+                getTotalVisits(),
+                getTotalPaid(),
+                statusText
         );
     }
 
