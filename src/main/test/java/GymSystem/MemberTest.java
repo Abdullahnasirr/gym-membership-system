@@ -1,17 +1,19 @@
+package GymSystem;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * MemberTest.java
+ * GymSystem.MemberTest.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  * Date: 18 March 2026
  * Tutorial: T05
  *
- * JUnit tests for the Member class.
+ * JUnit tests for the GymSystem.Member class.
  */
 class MemberTest {
 

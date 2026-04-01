@@ -1,8 +1,10 @@
+package GymSystem;
+
 /**
- * Main.java
+ * GymSystem.Main.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  * Date: 18 March 2026

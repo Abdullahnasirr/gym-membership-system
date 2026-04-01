@@ -1,3 +1,5 @@
+package GymSystem;
+
 import org.junit.jupiter.api.Test;
 // @author Ethan Chiu and Abdulah Nasir
 

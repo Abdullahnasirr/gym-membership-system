@@ -1,3 +1,5 @@
+package GymSystem;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,7 +39,7 @@ public class Menu {
 
                 //Option 4
                 case Constants.PAYMENT:
-                    System.out.println("\nPayment selected\n");
+                    System.out.println("\nGymSystem.Payment selected\n");
                     handlePayment();
                     break;
 
@@ -152,9 +154,9 @@ public class Menu {
     }
 
     private static void printOneMember(Object[] member) {
-        System.out.println("Member ID: " + member[Data.INDEX_ID]);
+        System.out.println("GymSystem.Member ID: " + member[Data.INDEX_ID]);
         System.out.println("Name: " + member[Data.INDEX_NAME]);
-        System.out.println("Membership Type: " + member[Data.INDEX_TYPE]);
+        System.out.println("GymSystem.Membership Type: " + member[Data.INDEX_TYPE]);
         System.out.println("Visits: " + member[Data.INDEX_VISITS]);
         System.out.println("Total Paid: $" + String.format("%.2f", (Double) member[Data.INDEX_TOTAL_PAID]));
         System.out.println("Status: " + (((Boolean) member[Data.INDEX_ACTIVE]) ? "Active" : "Inactive"));
@@ -266,25 +268,25 @@ public class Menu {
     // ==============================  Handle Methods  ===================================
 
     private static void handleAddMember() {
-        System.out.println("=== Add New Member ===");
+        System.out.println("=== Add New GymSystem.Member ===");
 
         String name = readNonEmptyString("Enter member name: ");
         String type = readMembershipType();
 
         int id = Data.addMember(name, type);
 
-        System.out.println("Member added successfully.");
+        System.out.println("GymSystem.Member added successfully.");
         System.out.println("Generated member ID: " + id);
     }
 
     private static void handleUpdateMember() {
-        System.out.println("=== Update Member Info ===");
+        System.out.println("=== Update GymSystem.Member Info ===");
 
         int id = readInt("Enter member ID: ");
         Object[] member = Data.getMemberById(id);
 
         if (member == null) {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
             return;
         }
 
@@ -297,7 +299,7 @@ public class Menu {
         boolean updated = Data.updateMemberInfo(id, newName, newType);
 
         if (updated) {
-            System.out.println("Member information updated successfully.");
+            System.out.println("GymSystem.Member information updated successfully.");
         } else {
             System.out.println("Update failed.");
         }
@@ -314,18 +316,18 @@ public class Menu {
             System.out.println("Check-in recorded successfully.");
             System.out.println("Total visits is now: " + member[Data.INDEX_VISITS]);
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
     private static void handlePayment() {
-        System.out.println("=== Record Payment ===");
+        System.out.println("=== Record GymSystem.Payment ===");
 
         int id = readInt("Enter member ID: ");
         double amount = readDouble("Enter payment amount: ");
 
         while (amount < 0) {
-            System.out.println("Payment amount cannot be negative.");
+            System.out.println("GymSystem.Payment amount cannot be negative.");
             amount = readDouble("Enter payment amount: ");
         }
 
@@ -333,21 +335,21 @@ public class Menu {
 
         if (success) {
             Object[] member = Data.getMemberById(id);
-            System.out.println("Payment recorded successfully.");
+            System.out.println("GymSystem.Payment recorded successfully.");
             System.out.println("Total paid is now: $" + String.format("%.2f", (Double) member[Data.INDEX_TOTAL_PAID]));
         } else {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
         }
     }
 
     private static void handleToggleActive() {
-        System.out.println("=== Set Member's Active / Inactive Status ===");
+        System.out.println("=== Set GymSystem.Member's Active / Inactive Status ===");
 
         int id = readInt("Enter member ID: ");
         Object[] member = Data.getMemberById(id);
 
         if (member == null) {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
             return;
         }
 
@@ -357,7 +359,7 @@ public class Menu {
         boolean success = Data.setActiveStatus(id, newStatus);
 
         if (success) {
-            System.out.println("Member status updated successfully.");
+            System.out.println("GymSystem.Member status updated successfully.");
         } else {
             System.out.println("Status update failed.");
         }
@@ -381,13 +383,13 @@ public class Menu {
     }
 
     private static void handleViewOneMember() {
-        System.out.println("=== View Member By ID ===");
+        System.out.println("=== View GymSystem.Member By ID ===");
 
         int id = readInt("Enter member ID: ");
         Object[] member = Data.getMemberById(id);
 
         if (member == null) {
-            System.out.println("Member not found.");
+            System.out.println("GymSystem.Member not found.");
             return;
         }
 
@@ -428,7 +430,7 @@ public class Menu {
     }
 
     private static void handleSummaryAverageByType() {
-        System.out.println("=== Summary: Average Visits By Membership Type ===");
+        System.out.println("=== Summary: Average Visits By GymSystem.Membership Type ===");
 
         System.out.println("Monthly average visits: " +
                 String.format("%.2f", Summaries.averageVisitsByType(Data.TYPE_MONTHLY)));

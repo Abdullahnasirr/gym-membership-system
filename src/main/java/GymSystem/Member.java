@@ -1,8 +1,10 @@
+package GymSystem;
+
 /**
- * Member.java
+ * GymSystem.Member.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  *  Date: 18 March 2026
@@ -28,7 +30,7 @@ public class Member implements Comparable<Member> {
     /** Whether the membership is currently active. */
     private boolean active;
 
-    /** Membership object associated with this member. */
+    /** GymSystem.Membership object associated with this member. */
     private Membership membership;
 
     /** Total number of visits recorded for this member. */
@@ -38,7 +40,7 @@ public class Member implements Comparable<Member> {
     private double totalPaid;
 
     /**
-     * Creates a new Member object with default visit/payment values.
+     * Creates a new GymSystem.Member object with default visit/payment values.
      *
      * @param memberId unique member ID
      * @param fullName member full name
@@ -139,7 +141,7 @@ public class Member implements Comparable<Member> {
     @Override
     public String toString() {
         return String.format(
-                "Member ID: %s | Name: %s | Contact: %s | Address: %s | Membership Type: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
+                "GymSystem.Member ID: %s | Name: %s | Contact: %s | Address: %s | GymSystem.Membership Type: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
                 memberId,
                 fullName,
                 phoneOrEmail,
@@ -182,7 +184,7 @@ public class Member implements Comparable<Member> {
     /**
      * Compares members by member ID for natural ordering.
      *
-     * @param other other Member object
+     * @param other other GymSystem.Member object
      * @return comparison result by memberId
      */
     @Override

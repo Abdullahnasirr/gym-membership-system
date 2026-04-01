@@ -1,29 +1,31 @@
+package GymSystem;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * GymSystemTest.java
+ * GymSystem.GymSystemTest.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  *  Date: 18 March 2026
  *  Tutorial: T05
  *
- * Unit tests for GymSystem methods.
+ * Unit tests for GymSystem.GymSystem methods.
  */
 class GymSystemTest {
 
     /**
-     * Instance of GymSystem used for testing.
+     * Instance of GymSystem.GymSystem used for testing.
      */
     private GymSystem gymSystem;
 
     /**
-     * Initializes a new GymSystem before each test.
+     * Initializes a new GymSystem.GymSystem before each test.
      * Ensures tests run with a fresh and independent instance.
      */
     @BeforeEach

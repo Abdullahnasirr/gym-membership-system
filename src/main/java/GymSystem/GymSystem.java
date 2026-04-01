@@ -1,13 +1,15 @@
+package GymSystem;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * GymSystem.java
+ * GymSystem.GymSystem.java
  *
  * CPSC 219 W26
- * Demo 2 - Gym Membership System
+ * Demo 2 - Gym GymSystem.Membership System
  *
  * Name: Wai Yan Aung
  *  Date: 18 March 2026
@@ -32,7 +34,7 @@ public class GymSystem {
     private int nextMemberNumber;
 
     /**
-     * Creates an empty GymSystem.
+     * Creates an empty GymSystem.GymSystem.
      */
     public GymSystem() {
         membersById = new HashMap<>();
@@ -76,7 +78,7 @@ public class GymSystem {
      * Finds one member by member ID.
      *
      * @param memberId unique member ID
-     * @return matching Member or null if not found
+     * @return matching GymSystem.Member or null if not found
      */
     public Member findMemberById(String memberId) {
         return membersById.get(memberId);
