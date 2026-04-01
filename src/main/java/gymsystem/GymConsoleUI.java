@@ -136,12 +136,26 @@ public class GymConsoleUI {
 
     public void handleRecordCheckIn() {
         String memberId = readString("Enter member ID: ");
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        member.refreshActiveStatus();
+
+        if (!member.isActive()) {
+            System.out.println("Check-in failed. Member is inactive or membership has expired.");
+            return;
+        }
+
         boolean success = gymSystem.recordCheckIn(memberId);
 
         if (success) {
             System.out.println("Check-in recorded successfully.");
         } else {
-            System.out.println("GymSystem.Member not found.");
+            System.out.println("Check-in failed.");
         }
     }
 
