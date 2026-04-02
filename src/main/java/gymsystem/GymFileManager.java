@@ -82,14 +82,10 @@ public class GymFileManager {
 
                     Membership membership = createMembershipFromType(type, startDate, endDate);
                     Member member = new Member(id, name, contact, address, membership);
+                    member.setTotalVisits(visits);
+                    member.setTotalPaid(totalPaid);
+                    member.setActive(active);
                     gymSystem.addMember(member);
-
-                    for (int i = 0; i < visits; i++) {
-                        gymSystem.recordCheckIn(id);
-                    }
-
-                    gymSystem.recordPayment(id, totalPaid);
-                    gymSystem.setMemberActive(id, active);
                 }
             }
 

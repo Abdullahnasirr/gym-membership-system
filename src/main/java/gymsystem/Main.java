@@ -1,5 +1,11 @@
 package gymsystem;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
 /**
  * GymSystem.Main.java
  *
@@ -12,9 +18,26 @@ package gymsystem;
  *
  * Launches the gym membership system.
  */
-public class Main {
+public class Main extends Application {
+
+    private static GymSystem gymSystem;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gymView.fxml"));
+        Parent root = loader.load();
+
+        GymController controller = loader.getController();
+        controller.setGymSystem(gymSystem);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Gym Membership System");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void main(String[] args) {
-        GymSystem gymSystem = new GymSystem();
+        gymSystem = new GymSystem();
 
         if (args.length > 0) {
             boolean loaded = GymFileManager.loadFromCsv(args[0], gymSystem);
@@ -30,7 +53,6 @@ public class Main {
             DemoData.load(gymSystem);
         }
 
-        GymConsoleUI ui = new GymConsoleUI(gymSystem);
-        ui.start();
+        launch(args);
     }
 }

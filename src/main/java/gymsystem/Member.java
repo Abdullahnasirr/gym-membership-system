@@ -222,4 +222,12 @@ public class Member implements Comparable<Member> {
             active = false;
         }
     }
+
+    public void setTotalVisits(int totalVisits) {
+        this.totalVisits = totalVisits;
+    }
+
+    public void setTotalPaid(double totalPaid) {
+        this.totalPaid = totalPaid;
+    }
 }
