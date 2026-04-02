@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 public class Constants {
     public static final int EXIT = 0;

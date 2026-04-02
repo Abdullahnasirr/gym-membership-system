@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,6 +90,7 @@ public class GymSystem {
      * @return all stored members
      */
     public ArrayList<Member> getAllMembers() {
+        refreshAllMemberStatuses();
         ArrayList<Member> members = new ArrayList<>(membersById.values());
         Collections.sort(members);
         return members;
@@ -144,6 +145,12 @@ public class GymSystem {
             return false;
         }
 
+        member.refreshActiveStatus();
+
+        if (!member.isActive()) {
+            return false;
+        }
+
         member.recordCheckIn();
         return true;
     }
@@ -190,6 +197,7 @@ public class GymSystem {
      * @return number of active members
      */
     public int getActiveMembersCount() {
+        refreshAllMemberStatuses();
         int count = 0;
 
         for (Member member : membersById.values()) {
@@ -235,6 +243,7 @@ public class GymSystem {
      * @return list of inactive or zero-visit members
      */
     public ArrayList<Member> getInactiveOrZeroVisitMembers() {
+        refreshAllMemberStatuses();
         ArrayList<Member> result = new ArrayList<>();
 
         for (Member member : membersById.values()) {
@@ -286,6 +295,12 @@ public class GymSystem {
                 }
             } catch (NumberFormatException e) {// Ignore bad ID format
             }
+        }
+    }
+
+    public void refreshAllMemberStatuses() {
+        for (Member member : membersById.values()) {
+            member.refreshActiveStatus();
         }
     }
 }

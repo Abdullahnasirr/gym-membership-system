@@ -1,4 +1,5 @@
-package GymSystem;
+package gymsystem;
+import java.time.LocalDate;
 
 /**
  * GymSystem.Member.java
@@ -140,16 +141,25 @@ public class Member implements Comparable<Member> {
      */
     @Override
     public String toString() {
+        refreshActiveStatus();
+
+        String statusText = active ? "Active" : "Inactive";
+        if (isMembershipExpired()) {
+            statusText += " (Expired)";
+        }
+
         return String.format(
-                "GymSystem.Member ID: %s | Name: %s | Contact: %s | Address: %s | GymSystem.Membership Type: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
+                "Member ID: %s | Name: %s | Contact: %s | Address: %s | Membership: %s | Start Date: %s | End Date: %s | Total Visits: %d | Total Paid: $%.2f | Status: %s",
                 memberId,
                 fullName,
                 phoneOrEmail,
                 address,
                 membership.getMembershipType(),
-                totalVisits,
-                totalPaid,
-                active ? "Active" : "Inactive"
+                membership.getStartDate(),
+                membership.getEndDate(),
+                getTotalVisits(),
+                getTotalPaid(),
+                statusText
         );
     }
 
@@ -190,5 +200,34 @@ public class Member implements Comparable<Member> {
     @Override
     public int compareTo(Member other) {
         return this.memberId.compareTo(other.memberId);
+    }
+
+    /**
+     * Checks whether the membership has expired by comparing today's date
+     * with the membership end date.
+     *
+     * @return true if today's date is after the membership end date, false otherwise.
+     */
+    public boolean isMembershipExpired() {
+        LocalDate today = LocalDate.now();
+        LocalDate membershipEndDate = LocalDate.parse(membership.getEndDate());
+        return today.isAfter(membershipEndDate);
+    }
+
+    /**
+     * Refreshes the active status by setting it to false when the membership has expired.
+     */
+    public void refreshActiveStatus() {
+        if (isMembershipExpired()) {
+            active = false;
+        }
+    }
+
+    public void setTotalVisits(int totalVisits) {
+        this.totalVisits = totalVisits;
+    }
+
+    public void setTotalPaid(double totalPaid) {
+        this.totalPaid = totalPaid;
     }
 }

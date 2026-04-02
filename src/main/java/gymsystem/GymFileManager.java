@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -22,7 +22,7 @@ public class GymFileManager {
         try {
             PrintWriter writer = new PrintWriter(new File(filename));
 
-            writer.println("id,name,contact,address,type,visits,totalPaid,active");
+            writer.println("id,name,contact,address,type,startDate,endDate,visits,totalPaid,active");
 
             for (Member member : gymSystem.getAllMembers()) {
                 writer.println(
@@ -31,6 +31,8 @@ public class GymFileManager {
                                 member.getPhoneOrEmail() + "," +
                                 member.getAddress() + "," +
                                 member.getMembershipType() + "," +
+                                member.getMembership().getStartDate() + "," +
+                                member.getMembership().getEndDate() + "," +
                                 member.getTotalVisits() + "," +
                                 member.getTotalPaid() + "," +
                                 member.isActive()
@@ -66,26 +68,24 @@ public class GymFileManager {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split(",");
 
-                if (parts.length == 8) {
+                if (parts.length == 10) {
                     String id = parts[0];
                     String name = parts[1];
                     String contact = parts[2];
                     String address = parts[3];
                     String type = parts[4];
-                    int visits = Integer.parseInt(parts[5]);
-                    double totalPaid = Double.parseDouble(parts[6]);
-                    boolean active = Boolean.parseBoolean(parts[7]);
+                    String startDate = parts[5];
+                    String endDate = parts[6];
+                    int visits = Integer.parseInt(parts[7]);
+                    double totalPaid = Double.parseDouble(parts[8]);
+                    boolean active = Boolean.parseBoolean(parts[9]);
 
-                    Membership membership = createMembershipFromType(type);
+                    Membership membership = createMembershipFromType(type, startDate, endDate);
                     Member member = new Member(id, name, contact, address, membership);
+                    member.setTotalVisits(visits);
+                    member.setTotalPaid(totalPaid);
+                    member.setActive(active);
                     gymSystem.addMember(member);
-
-                    for (int i = 0; i < visits; i++) {
-                        gymSystem.recordCheckIn(id);
-                    }
-
-                    gymSystem.recordPayment(id, totalPaid);
-                    gymSystem.setMemberActive(id, active);
                 }
             }
 
@@ -98,13 +98,13 @@ public class GymFileManager {
         }
     }
 
-    private static Membership createMembershipFromType(String type) {
+    private static Membership createMembershipFromType(String type, String startDate, String endDate) {
         if (type.equalsIgnoreCase("Monthly")) {
-            return new MonthlyMembership("2026-03-19", "2026-04-19");
+            return new MonthlyMembership(startDate, endDate);
         } else if (type.equalsIgnoreCase("Quarterly")) {
-            return new QuarterlyMembership("2026-03-19", "2026-06-19");
+            return new QuarterlyMembership(startDate, endDate);
         } else {
-            return new AnnualMembership("2026-03-19", "2027-03-19");
+            return new AnnualMembership(startDate, endDate);
         }
     }
 }

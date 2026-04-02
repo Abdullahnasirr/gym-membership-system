@@ -1,4 +1,4 @@
-package GymSystem;// Represents a monthly membership.
+package gymsystem;// Represents a monthly membership.
 // @author Ethan Chiu
 
 

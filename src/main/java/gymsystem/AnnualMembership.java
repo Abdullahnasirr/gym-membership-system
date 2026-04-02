@@ -1,4 +1,4 @@
-package GymSystem;// Represents an annual membership
+package gymsystem;// Represents an annual membership
 // @author Ethan Chiu
 
 public class AnnualMembership extends Membership {

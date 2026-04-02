@@ -1,4 +1,4 @@
-package GymSystem;
+package gymsystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -113,6 +113,7 @@ public class GymConsoleUI {
         }
 
         Member member = new Member(memberId, fullName, phoneOrEmail, address, membership);
+        gymSystem.addMember(member);
 
         System.out.println("GymSystem.Member added successfully.");
         System.out.println("New member ID: " + memberId);
@@ -135,12 +136,26 @@ public class GymConsoleUI {
 
     public void handleRecordCheckIn() {
         String memberId = readString("Enter member ID: ");
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        member.refreshActiveStatus();
+
+        if (!member.isActive()) {
+            System.out.println("Check-in failed. Member is inactive or membership has expired.");
+            return;
+        }
+
         boolean success = gymSystem.recordCheckIn(memberId);
 
         if (success) {
             System.out.println("Check-in recorded successfully.");
         } else {
-            System.out.println("GymSystem.Member not found.");
+            System.out.println("Check-in failed.");
         }
     }
 
