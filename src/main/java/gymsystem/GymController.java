@@ -190,6 +190,101 @@ public class GymController {
     }
 
     @FXML
+    private void handleRecordCheckIn() {
+        String memberId = memberIdField.getText().trim();
+
+        if (memberId.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a member ID.");
+            return;
+        }
+
+        if (!newNameField.getText().trim().isEmpty()
+                || !newContactField.getText().trim().isEmpty()
+                || !newAddressField.getText().trim().isEmpty()
+                || !paymentAmountField.getText().trim().isEmpty()) {
+            showErrorAlert("Wrong Fields Used",
+                    "Record Check-In only uses the member ID field.\n" +
+                            "Clear the update and payment fields first.");
+            return;
+        }
+
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            showErrorAlert("Member Not Found", "No member was found with ID: " + memberId);
+            return;
+        }
+
+        boolean checkedIn = gymSystem.recordCheckIn(memberId);
+
+        if (!checkedIn) {
+            showErrorAlert("Check-In Failed",
+                    "This member is inactive or the membership has expired.");
+            return;
+        }
+
+        showInfoAlert("Check-In Recorded", "Check-in recorded successfully for member " + memberId + ".");
+        clearCheckInFields();
+        refreshAllMembersView();
+    }
+
+    @FXML
+    private void handleRecordPayment() {
+        String memberId = memberIdField.getText().trim();
+        String paymentText = paymentAmountField.getText().trim();
+
+        if (memberId.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a member ID.");
+            return;
+        }
+
+        if (paymentText.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a payment amount.");
+            return;
+        }
+
+        if (!newNameField.getText().trim().isEmpty()
+                || !newContactField.getText().trim().isEmpty()
+                || !newAddressField.getText().trim().isEmpty()) {
+            showErrorAlert("Wrong Fields Used",
+                    "Name, contact, and address fields are not part of Record Payment.\n" +
+                            "Clear those fields or use Update Member instead.");
+            return;
+        }
+
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            showErrorAlert("Member Not Found", "No member was found with ID: " + memberId);
+            return;
+        }
+
+        double amount;
+        try {
+            amount = Double.parseDouble(paymentText);
+        } catch (NumberFormatException e) {
+            showErrorAlert("Invalid Payment", "Payment amount must be a valid number.");
+            return;
+        }
+
+        if (amount <= 0) {
+            showErrorAlert("Invalid Payment", "Payment amount must be greater than 0.");
+            return;
+        }
+
+        boolean recorded = gymSystem.recordPayment(memberId, amount);
+
+        if (!recorded) {
+            showErrorAlert("Payment Failed", "Could not record payment.");
+            return;
+        }
+
+        showInfoAlert("Payment Recorded", "Payment recorded successfully for member " + memberId + ".");
+        clearPaymentFields();
+        refreshAllMembersView();
+    }
+
+    @FXML
     private void handleViewOneMember() {
         String memberId = memberIdField.getText().trim();
 
@@ -237,6 +332,14 @@ public class GymController {
         newNameField.clear();
         newContactField.clear();
         newAddressField.clear();
+    }
+
+    private void clearCheckInFields() {
+        memberIdField.clear();
+    }
+
+    private void clearPaymentFields() {
+        memberIdField.clear();
         paymentAmountField.clear();
     }
 
