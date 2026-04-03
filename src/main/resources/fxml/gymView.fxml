@@ -24,10 +24,10 @@
     <top>
         <MenuBar>
             <menus>
-                <Menu text="File">
+                <Menu text="Menu">
                     <items>
-                        <MenuItem text="Save" onAction="#handleSave"/>
-                        <MenuItem text="Load" onAction="#handleLoad"/>
+                        <MenuItem text="Save CSV" onAction="#handleSave"/>
+                        <MenuItem text="Load CSV" onAction="#handleLoad"/>
                         <SeparatorMenuItem/>
                         <MenuItem text="Quit" onAction="#handleQuit"/>
                     </items>
@@ -54,19 +54,19 @@
                         <Label text="Add Member" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
                         <GridPane hgap="10.0" vgap="10.0">
-                            <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <Label text="Full Name* :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                             <TextField fx:id="fullNameField" promptText="Enter full name"
                                        GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                            <Label text="Contact:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <Label text="Contact* :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                             <TextField fx:id="contactField" promptText="Enter phone or email"
                                        GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                            <Label text="Address:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <Label text="Address* :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
                             <TextField fx:id="addressField" promptText="Enter address"
                                        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                            <Label text="Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                            <Label text="Membership Type* :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
                             <ComboBox fx:id="membershipTypeComboBox" prefWidth="180.0"
                                       promptText="Select membership type"
                                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
@@ -85,7 +85,7 @@
                         <Label text="Member Actions" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
                         <GridPane hgap="10.0" vgap="10.0">
-                            <Label text="Member ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <Label text="Member ID* :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                             <TextField fx:id="memberIdField" promptText="Enter member ID"
                                        GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
@@ -107,7 +107,7 @@
                         </GridPane>
 
                         <VBox spacing="8.0">
-                            <Button text="Update Member" maxWidth="1.7976931348623157E308"/>
+                            <Button text="Update Member"  onAction="#handleUpdateMember" maxWidth="1.7976931348623157E308"/>
                             <Button text="Record Check-In" maxWidth="1.7976931348623157E308"/>
                             <Button text="Record Payment" maxWidth="1.7976931348623157E308"/>
 
@@ -116,9 +116,7 @@
                                 <Button text="Set Inactive" maxWidth="1.7976931348623157E308"/>
                             </HBox>
 
-                            <Button text="View One Member"
-                                    onAction="#handleViewOneMember"
-                                    maxWidth="1.7976931348623157E308"/>
+                            <Button text="View One Member" onAction="#handleViewOneMember" maxWidth="1.7976931348623157E308"/>
 
                         </VBox>
                     </VBox>
