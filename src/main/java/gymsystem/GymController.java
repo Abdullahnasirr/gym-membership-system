@@ -285,6 +285,55 @@ public class GymController {
     }
 
     @FXML
+    private void handleSetActive() {
+        handleSetMemberActiveStatus(true);
+    }
+
+    @FXML
+    private void handleSetInactive() {
+        handleSetMemberActiveStatus(false);
+    }
+
+    private void handleSetMemberActiveStatus(boolean activeStatus) {
+        String memberId = memberIdField.getText().trim();
+
+        if (memberId.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a member ID.");
+            return;
+        }
+
+        if (!newNameField.getText().trim().isEmpty()
+                || !newContactField.getText().trim().isEmpty()
+                || !newAddressField.getText().trim().isEmpty()
+                || !paymentAmountField.getText().trim().isEmpty()) {
+            showErrorAlert("Wrong Fields Used",
+                    "Set Active / Set Inactive only uses the member ID field.\n" +
+                            "Clear the update and payment fields first.");
+            return;
+        }
+
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            showErrorAlert("Member Not Found", "No member was found with ID: " + memberId);
+            return;
+        }
+
+        boolean updated = gymSystem.setMemberActive(memberId, activeStatus);
+
+        if (!updated) {
+            showErrorAlert("Status Update Failed", "Could not update member status.");
+            return;
+        }
+
+        String statusText = activeStatus ? "active" : "inactive";
+        showInfoAlert("Status Updated", "Member " + memberId + " is now marked as " + statusText + ".");
+
+        clearStatusFields();
+        refreshAllMembersView();
+    }
+
+    @FXML
     private void handleViewOneMember() {
         String memberId = memberIdField.getText().trim();
 
@@ -341,6 +390,10 @@ public class GymController {
     private void clearPaymentFields() {
         memberIdField.clear();
         paymentAmountField.clear();
+    }
+
+    private void clearStatusFields() {
+        memberIdField.clear();
     }
 
     private void showErrorAlert(String title, String message) {
