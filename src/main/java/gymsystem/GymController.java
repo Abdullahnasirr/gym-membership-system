@@ -15,6 +15,9 @@ public class GymController {
     private TextArea outputArea;
 
     @FXML
+    private TextField memberIdField;
+
+    @FXML
     private TextField fullNameField;
 
     @FXML
@@ -38,6 +41,34 @@ public class GymController {
     public void setGymSystem(GymSystem gymSystem) {
         this.gymSystem = gymSystem;
         refreshAllMembersView();
+    }
+
+    @FXML
+    private void handleSave() {
+        outputArea.setText("Saving data...");
+    }
+
+    @FXML
+    private void handleLoad() {
+        outputArea.setText("Loading data...");
+    }
+
+    @FXML
+    private void handleQuit() {
+        Platform.exit();
+    }
+
+    @FXML
+    private void handleAbout() {
+        Alert aboutAlert = new Alert(Alert.AlertType.INFORMATION);
+        aboutAlert.setTitle("About");
+        aboutAlert.setHeaderText("Gym Membership System");
+        aboutAlert.setContentText(
+                "CPSC 219 W26 (Gym Membership System Project)\n" +
+                        "This application manages gym members, visits, payments, and summaries through a JavaFX graphical user interface.\n\n" +
+                        "Authors: Abdullah Nasir, Brandon Aung, Ethan Chiu"
+        );
+        aboutAlert.showAndWait();
     }
 
     @FXML
@@ -87,31 +118,22 @@ public class GymController {
     }
 
     @FXML
-    private void handleSave() {
-        outputArea.setText("Saving data...");
-    }
+    private void handleViewOneMember() {
+        String memberId = memberIdField.getText().trim();
 
-    @FXML
-    private void handleLoad() {
-        outputArea.setText("Loading data...");
-    }
+        if (memberId.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a member ID.");
+            return;
+        }
 
-    @FXML
-    private void handleQuit() {
-        Platform.exit();
-    }
+        Member member = gymSystem.findMemberById(memberId);
 
-    @FXML
-    private void handleAbout() {
-        Alert aboutAlert = new Alert(Alert.AlertType.INFORMATION);
-        aboutAlert.setTitle("About");
-        aboutAlert.setHeaderText("Gym Membership System");
-        aboutAlert.setContentText(
-                "CPSC 219 W26 (Gym Membership System Project)\n" +
-                        "This application manages gym members, visits, payments, and summaries through a JavaFX graphical user interface.\n\n" +
-                        "Authors: Abdullah Nasir, Brandon Aung, Ethan Chiu"
-        );
-        aboutAlert.showAndWait();
+        if (member == null) {
+            showErrorAlert("Member Not Found", "No member was found with ID: " + memberId);
+            return;
+        }
+
+        outputArea.setText(member + "\n-------------------------\n");
     }
 
     @FXML
