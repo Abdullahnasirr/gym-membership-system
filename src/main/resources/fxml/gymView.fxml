@@ -15,6 +15,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 
 <?import javafx.scene.control.SeparatorMenuItem?>
 <BorderPane xmlns="http://javafx.com/javafx/25"
@@ -156,13 +162,40 @@
     </left>
 
     <center>
-        <VBox spacing="10.0">
+        <VBox spacing="12.0">
             <padding>
                 <Insets top="15.0" right="15.0" bottom="15.0" left="15.0"/>
             </padding>
 
+            <Label text="Analytics" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="12.0">
+                <PieChart fx:id="membershipPieChart" title="Membership Distribution" prefHeight="250.0" prefWidth="320.0"/>
+
+                <BarChart fx:id="revenueBarChart" title="Revenue by Membership Type" prefHeight="250.0" prefWidth="420.0">
+                    <xAxis>
+                        <CategoryAxis label="Membership Type"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Revenue"/>
+                    </yAxis>
+                </BarChart>
+            </HBox>
+
             <Label text="Output / Results" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-            <TextArea fx:id="outputArea" editable="false" wrapText="true"/>
+
+            <TableView fx:id="memberTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="Member ID" prefWidth="90.0"/>
+                    <TableColumn fx:id="nameColumn" text="Full Name" prefWidth="140.0"/>
+                    <TableColumn fx:id="contactColumn" text="Contact" prefWidth="140.0"/>
+                    <TableColumn fx:id="addressColumn" text="Address" prefWidth="140.0"/>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="100.0"/>
+                    <TableColumn fx:id="visitsColumn" text="Visits" prefWidth="70.0"/>
+                    <TableColumn fx:id="paidColumn" text="Total Paid" prefWidth="90.0"/>
+                    <TableColumn fx:id="activeColumn" text="Active" prefWidth="70.0"/>
+                </columns>
+            </TableView>
         </VBox>
     </center>
 
