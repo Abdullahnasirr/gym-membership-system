@@ -116,7 +116,10 @@
                                 <Button text="Set Inactive" maxWidth="1.7976931348623157E308"/>
                             </HBox>
 
-                            <Button text="View One Member" maxWidth="1.7976931348623157E308"/>
+                            <Button text="View One Member"
+                                    onAction="#handleViewOneMember"
+                                    maxWidth="1.7976931348623157E308"/>
+
                         </VBox>
                     </VBox>
 
