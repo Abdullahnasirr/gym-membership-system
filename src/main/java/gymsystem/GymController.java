@@ -7,12 +7,50 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.collections.FXCollections;
 
 public class GymController {
     private GymSystem gymSystem;
 
     @FXML
-    private TextArea outputArea;
+    private PieChart membershipPieChart;
+
+    @FXML
+    private BarChart<String, Number> revenueBarChart;
+
+    @FXML
+    private TableView<Member> memberTable;
+
+    @FXML
+    private TableColumn<Member, String> idColumn;
+
+    @FXML
+    private TableColumn<Member, String> nameColumn;
+
+    @FXML
+    private TableColumn<Member, String> contactColumn;
+
+    @FXML
+    private TableColumn<Member, String> addressColumn;
+
+    @FXML
+    private TableColumn<Member, String> typeColumn;
+
+    @FXML
+    private TableColumn<Member, Integer> visitsColumn;
+
+    @FXML
+    private TableColumn<Member, Double> paidColumn;
+
+    @FXML
+    private TableColumn<Member, Boolean> activeColumn;
 
     @FXML
     private TextField memberIdField;
@@ -48,21 +86,35 @@ public class GymController {
                 GymSystem.TYPE_QUARTERLY,
                 GymSystem.TYPE_ANNUALLY
         );
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("phoneOrEmail"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("membershipType"));
+        visitsColumn.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
+        paidColumn.setCellValueFactory(new PropertyValueFactory<>("totalPaid"));
+        activeColumn.setCellValueFactory(new PropertyValueFactory<>("active"));
     }
 
     public void setGymSystem(GymSystem gymSystem) {
         this.gymSystem = gymSystem;
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
     private void handleSave() {
-        outputArea.setText("Saving data...");
+        showInfoAlert("Save", "Saving data...");
+        refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
     private void handleLoad() {
-        outputArea.setText("Loading data...");
+        showInfoAlert("Load", "Loading data...");
+        refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -127,6 +179,7 @@ public class GymController {
         showInfoAlert("Member Added", "New member added successfully.\nMember ID: " + memberId);
         clearAddMemberFields();
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -187,6 +240,7 @@ public class GymController {
         showInfoAlert("Member Updated", "Member updated successfully.");
         clearUpdateFields();
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -226,6 +280,7 @@ public class GymController {
         showInfoAlert("Check-In Recorded", "Check-in recorded successfully for member " + memberId + ".");
         clearCheckInFields();
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -282,6 +337,7 @@ public class GymController {
         showInfoAlert("Payment Recorded", "Payment recorded successfully for member " + memberId + ".");
         clearPaymentFields();
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -331,6 +387,7 @@ public class GymController {
 
         clearStatusFields();
         refreshAllMembersView();
+        refreshAnalyticsCharts();
     }
 
     @FXML
@@ -349,7 +406,7 @@ public class GymController {
             return;
         }
 
-        outputArea.setText(member + "\n-------------------------\n");
+        memberTable.setItems(FXCollections.observableArrayList(member));
     }
 
     @FXML
@@ -358,15 +415,11 @@ public class GymController {
     }
 
     private void refreshAllMembersView() {
-        if (outputArea == null || gymSystem == null) {
+        if (memberTable == null || gymSystem == null) {
             return;
         }
 
-        StringBuilder builder = new StringBuilder();
-        for (Member member : gymSystem.getAllMembers()) {
-            builder.append(member).append("\n-------------------------\n");
-        }
-        outputArea.setText(builder.toString());
+        memberTable.setItems(FXCollections.observableArrayList(gymSystem.getAllMembers()));
     }
 
     private void clearAddMemberFields() {
@@ -410,5 +463,51 @@ public class GymController {
         infoAlert.setHeaderText(null);
         infoAlert.setContentText(message);
         infoAlert.showAndWait();
+    }
+
+    private void refreshAnalyticsCharts() {
+        if (gymSystem == null || membershipPieChart == null || revenueBarChart == null) {
+            return;
+        }
+
+        int monthlyCount = 0;
+        int quarterlyCount = 0;
+        int annualCount = 0;
+
+        double monthlyRevenue = 0.0;
+        double quarterlyRevenue = 0.0;
+        double annualRevenue = 0.0;
+
+        for (Member member : gymSystem.getAllMembers()) {
+            String type = member.getMembershipType();
+
+            if (type.equalsIgnoreCase(GymSystem.TYPE_MONTHLY)) {
+                monthlyCount++;
+                monthlyRevenue += member.getTotalPaid();
+            } else if (type.equalsIgnoreCase(GymSystem.TYPE_QUARTERLY)) {
+                quarterlyCount++;
+                quarterlyRevenue += member.getTotalPaid();
+            } else if (type.equalsIgnoreCase(GymSystem.TYPE_ANNUALLY)) {
+                annualCount++;
+                annualRevenue += member.getTotalPaid();
+            }
+        }
+
+        membershipPieChart.setData(FXCollections.observableArrayList(
+                new PieChart.Data("Monthly", monthlyCount),
+                new PieChart.Data("Quarterly", quarterlyCount),
+                new PieChart.Data("Annually", annualCount)
+        ));
+
+        revenueBarChart.getData().clear();
+
+        XYChart.Series<String, Number> revenueSeries = new XYChart.Series<>();
+        revenueSeries.setName("Revenue");
+
+        revenueSeries.getData().add(new XYChart.Data<>("Monthly", monthlyRevenue));
+        revenueSeries.getData().add(new XYChart.Data<>("Quarterly", quarterlyRevenue));
+        revenueSeries.getData().add(new XYChart.Data<>("Annually", annualRevenue));
+
+        revenueBarChart.getData().add(revenueSeries);
     }
 }
