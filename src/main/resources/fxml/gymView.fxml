@@ -108,8 +108,8 @@
 
                         <VBox spacing="8.0">
                             <Button text="Update Member"  onAction="#handleUpdateMember" maxWidth="1.7976931348623157E308"/>
-                            <Button text="Record Check-In" maxWidth="1.7976931348623157E308"/>
-                            <Button text="Record Payment" maxWidth="1.7976931348623157E308"/>
+                            <Button text="Record Check-In" onAction="#handleRecordCheckIn" maxWidth="1.7976931348623157E308"/>
+                            <Button text="Record Payment" onAction="#handleRecordPayment" maxWidth="1.7976931348623157E308"/>
 
                             <HBox spacing="8.0">
                                 <Button text="Set Active" maxWidth="1.7976931348623157E308"/>
