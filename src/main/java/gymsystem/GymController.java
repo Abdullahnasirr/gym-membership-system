@@ -30,6 +30,18 @@ public class GymController {
     private ComboBox<String> membershipTypeComboBox;
 
     @FXML
+    private TextField newNameField;
+
+    @FXML
+    private TextField newContactField;
+
+    @FXML
+    private TextField newAddressField;
+
+    @FXML
+    private TextField paymentAmountField;
+
+    @FXML
     public void initialize() {
         membershipTypeComboBox.getItems().addAll(
                 GymSystem.TYPE_MONTHLY,
@@ -118,6 +130,66 @@ public class GymController {
     }
 
     @FXML
+    private void handleUpdateMember() {
+        String memberId = memberIdField.getText().trim();
+        String newName = newNameField.getText().trim();
+        String newContact = newContactField.getText().trim();
+        String newAddress = newAddressField.getText().trim();
+
+        if (memberId.isEmpty()) {
+            showErrorAlert("Invalid Input", "Please enter a member ID.");
+            return;
+        }
+
+        Member member = gymSystem.findMemberById(memberId);
+
+        if (member == null) {
+            showErrorAlert("Member Not Found", "No member was found with ID: " + memberId);
+            return;
+        }
+
+        if (!paymentAmountField.getText().trim().isEmpty()) {
+            showErrorAlert("Wrong Field Used",
+                    "Payment amount is not part of Update Member.\n" +
+                            "Clear the payment field or use Record Payment instead.");
+            return;
+        }
+
+        if (newName.isEmpty() && newContact.isEmpty() && newAddress.isEmpty()) {
+            showErrorAlert("No Changes", "Please enter at least one field to update.");
+            return;
+        }
+
+        // Use old values if field is empty
+        String updatedName = newName.isEmpty() ? member.getFullName() : newName;
+        String updatedContact = newContact.isEmpty() ? member.getPhoneOrEmail() : newContact;
+        String updatedAddress = newAddress.isEmpty() ? member.getAddress() : newAddress;
+
+        // Duplicate contact check ONLY if contact is changed
+        if (!updatedContact.equalsIgnoreCase(member.getPhoneOrEmail())
+                && gymSystem.isContactUsed(updatedContact)) {
+            showErrorAlert("Duplicate Contact", "That contact is already used by another member.");
+            return;
+        }
+
+        boolean updated = gymSystem.updateMemberInfo(
+                memberId,
+                updatedName,
+                updatedContact,
+                updatedAddress
+        );
+
+        if (!updated) {
+            showErrorAlert("Update Failed", "Could not update member information.");
+            return;
+        }
+
+        showInfoAlert("Member Updated", "Member updated successfully.");
+        clearUpdateFields();
+        refreshAllMembersView();
+    }
+
+    @FXML
     private void handleViewOneMember() {
         String memberId = memberIdField.getText().trim();
 
@@ -158,6 +230,14 @@ public class GymController {
         contactField.clear();
         addressField.clear();
         membershipTypeComboBox.setValue(null);
+    }
+
+    private void clearUpdateFields() {
+        memberIdField.clear();
+        newNameField.clear();
+        newContactField.clear();
+        newAddressField.clear();
+        paymentAmountField.clear();
     }
 
     private void showErrorAlert(String title, String message) {
