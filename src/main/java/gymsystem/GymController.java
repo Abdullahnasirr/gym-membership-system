@@ -4,6 +4,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import java.time.LocalDate;
 
 public class GymController {
     private GymSystem gymSystem;
@@ -11,8 +14,75 @@ public class GymController {
     @FXML
     private TextArea outputArea;
 
+    @FXML
+    private TextField fullNameField;
+
+    @FXML
+    private TextField contactField;
+
+    @FXML
+    private TextField addressField;
+
+    @FXML
+    private ComboBox<String> membershipTypeComboBox;
+
+    @FXML
+    public void initialize() {
+        membershipTypeComboBox.getItems().addAll(
+                GymSystem.TYPE_MONTHLY,
+                GymSystem.TYPE_QUARTERLY,
+                GymSystem.TYPE_ANNUALLY
+        );
+    }
+
     public void setGymSystem(GymSystem gymSystem) {
         this.gymSystem = gymSystem;
+        refreshAllMembersView();
+    }
+
+    @FXML
+    private void handleAddMember() {
+        String fullName = fullNameField.getText().trim();
+        String contact = contactField.getText().trim();
+        String address = addressField.getText().trim();
+        String membershipType = membershipTypeComboBox.getValue();
+
+        if (fullName.isEmpty() || contact.isEmpty() || address.isEmpty() || membershipType == null) {
+            showErrorAlert("Invalid Input", "Please fill in all Add Member fields.");
+            return;
+        }
+
+        if (gymSystem.isContactUsed(contact)) {
+            showErrorAlert("Duplicate Contact", "That contact is already used by another member.");
+            return;
+        }
+
+        String memberId = gymSystem.generateMemberId();
+        LocalDate startDate = LocalDate.now();
+        Membership membership;
+
+        if (membershipType.equals(GymSystem.TYPE_MONTHLY)) {
+            membership = new MonthlyMembership(
+                    startDate.toString(),
+                    startDate.plusMonths(1).toString()
+            );
+        } else if (membershipType.equals(GymSystem.TYPE_QUARTERLY)) {
+            membership = new QuarterlyMembership(
+                    startDate.toString(),
+                    startDate.plusMonths(3).toString()
+            );
+        } else {
+            membership = new AnnualMembership(
+                    startDate.toString(),
+                    startDate.plusMonths(12).toString()
+            );
+        }
+
+        Member member = new Member(memberId, fullName, contact, address, membership);
+        gymSystem.addMember(member);
+
+        showInfoAlert("Member Added", "New member added successfully.\nMember ID: " + memberId);
+        clearAddMemberFields();
         refreshAllMembersView();
     }
 
@@ -61,8 +131,26 @@ public class GymController {
         outputArea.setText(builder.toString());
     }
 
-    @FXML
-    private void handleAddMember() {
-        outputArea.setText("Add Member clicked, not implemented yet");
+    private void clearAddMemberFields() {
+        fullNameField.clear();
+        contactField.clear();
+        addressField.clear();
+        membershipTypeComboBox.setValue(null);
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.showAndWait();
+    }
+
+    private void showInfoAlert(String title, String message) {
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle(title);
+        infoAlert.setHeaderText(null);
+        infoAlert.setContentText(message);
+        infoAlert.showAndWait();
     }
 }
