@@ -112,8 +112,8 @@
                             <Button text="Record Payment" onAction="#handleRecordPayment" maxWidth="1.7976931348623157E308"/>
 
                             <HBox spacing="8.0">
-                                <Button text="Set Active" maxWidth="1.7976931348623157E308"/>
-                                <Button text="Set Inactive" maxWidth="1.7976931348623157E308"/>
+                                <Button text="Set Active" onAction="#handleSetActive" maxWidth="1.7976931348623157E308"/>
+                                <Button text="Set Inactive" onAction="#handleSetInactive" maxWidth="1.7976931348623157E308"/>
                             </HBox>
 
                             <Button text="View One Member" onAction="#handleViewOneMember" maxWidth="1.7976931348623157E308"/>
