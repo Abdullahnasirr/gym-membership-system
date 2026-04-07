@@ -1,12 +1,12 @@
 package gymsystem;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 public class GymController {
 
@@ -18,61 +18,83 @@ public class GymController {
 
     private GymSystem gymSystem;
 
+    @FXML
+    public void initialize() {
+        if (summaryMembershipTypeComboBox != null) {
+            summaryMembershipTypeComboBox.getItems().addAll(
+                    GymSystem.TYPE_MONTHLY,
+                    GymSystem.TYPE_QUARTERLY,
+                    GymSystem.TYPE_ANNUALLY
+            );
+        }
+    }
+
     public void setGymSystem(GymSystem gymSystem) {
         this.gymSystem = gymSystem;
         refreshAllMembersView();
     }
-
-    // ===================== BASIC VIEW =====================
 
     public void handleViewAllMembers() {
         refreshAllMembersView();
     }
 
     private void refreshAllMembersView() {
-        StringBuilder sb = new StringBuilder("All Members:\n\n");
+        if (gymSystem == null || outputArea == null) {
+            return;
+        }
 
+        StringBuilder sb = new StringBuilder("All Members:\n\n");
         List<Member> members = gymSystem.getAllMembers();
 
-        for (Member member : members) {
-            sb.append(member).append("\n\n");
+        if (members.isEmpty()) {
+            sb.append("No members found.");
+        } else {
+            for (Member member : members) {
+                sb.append(member).append("\n\n");
+            }
         }
 
         outputArea.setText(sb.toString());
     }
 
-    // ===================== SUMMARY METHODS =====================
-
     public void handleShowMemberCounts() {
-        outputArea.setText("Total Members: " + gymSystem.getTotalMembers()
-                + "\nActive Members: " + gymSystem.getActiveMemberCount());
+        outputArea.setText(
+                "Total Members: " + gymSystem.getTotalMembers()
+                        + "\nActive Members: " + gymSystem.getActiveMembersCount()
+        );
     }
 
     public void handleShowTotalRevenue() {
-        outputArea.setText("Total Revenue: $" + gymSystem.getTotalRevenue());
+        outputArea.setText(String.format("Total Revenue: $%.2f", gymSystem.getTotalRevenue()));
     }
 
     public void handleShowTop5Visits() {
         StringBuilder sb = new StringBuilder("Top 5 Members By Visits:\n\n");
 
-        for (Member member : gymSystem.getTop5MembersByVisits()) {
-            sb.append(member).append("\n\n");
+        List<Member> topMembers = gymSystem.getTop5MembersByVisits();
+
+        if (topMembers.isEmpty()) {
+            sb.append("No members found.");
+        } else {
+            for (Member member : topMembers) {
+                sb.append(member).append("\n\n");
+            }
         }
 
         outputArea.setText(sb.toString());
     }
 
     public void handleShowInactiveOrZeroVisits() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Inactive or Zero-Visit Members:\n\n");
 
-        sb.append("Inactive Members:\n\n");
-        for (Member member : gymSystem.getInactiveMembers()) {
-            sb.append(member).append("\n\n");
-        }
+        List<Member> members = gymSystem.getInactiveOrZeroVisitMembers();
 
-        sb.append("\nMembers With Zero Visits:\n\n");
-        for (Member member : gymSystem.getMembersWithZeroVisits()) {
-            sb.append(member).append("\n\n");
+        if (members.isEmpty()) {
+            sb.append("None found.");
+        } else {
+            for (Member member : members) {
+                sb.append(member).append("\n\n");
+            }
         }
 
         outputArea.setText(sb.toString());
@@ -86,11 +108,9 @@ public class GymController {
             return;
         }
 
-        double avg = gymSystem.getAverageVisitsByMembershipType(selectedType);
-        outputArea.setText("Average Visits for " + selectedType + ": " + avg);
+        double average = gymSystem.getAverageVisitsByMembershipType(selectedType);
+        outputArea.setText("Average visits for " + selectedType + " members: " + average);
     }
-
-    // ===================== SAVE / LOAD =====================
 
     public void handleSaveData() {
         TextInputDialog dialog = new TextInputDialog("gym_data.csv");
@@ -103,12 +123,22 @@ public class GymController {
         if (result.isPresent()) {
             String fileName = result.get().trim();
 
+            if (fileName.isEmpty()) {
+                outputArea.setText("Save cancelled. File name cannot be empty.");
+                return;
+            }
+
             if (!fileName.endsWith(".csv")) {
                 fileName += ".csv";
             }
 
-            GymFileManager.saveToCsv(fileName, gymSystem);
-            outputArea.setText("Data saved to " + fileName);
+            boolean success = GymFileManager.saveToCsv(fileName, gymSystem);
+
+            if (success) {
+                outputArea.setText("Data saved to " + fileName);
+            } else {
+                outputArea.setText("Failed to save data to " + fileName);
+            }
         }
     }
 
@@ -123,15 +153,23 @@ public class GymController {
         if (result.isPresent()) {
             String fileName = result.get().trim();
 
+            if (fileName.isEmpty()) {
+                outputArea.setText("Load cancelled. File name cannot be empty.");
+                return;
+            }
+
             if (!fileName.endsWith(".csv")) {
                 fileName += ".csv";
             }
 
-            GymFileManager.loadFromCsv(fileName, gymSystem);
+            boolean success = GymFileManager.loadFromCsv(fileName, gymSystem);
 
-            outputArea.setText("Data loaded from " + fileName + "\n\n");
-
-            refreshAllMembersView();
+            if (success) {
+                outputArea.setText("Data loaded from " + fileName + "\n\n");
+                refreshAllMembersView();
+            } else {
+                outputArea.setText("Failed to load data from " + fileName);
+            }
         }
     }
-}}
+}
