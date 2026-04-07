@@ -6,18 +6,9 @@ import java.util.Scanner;
 
 /**
  * Handles saving and loading gym data to and from CSV files.
- *
- * @author Ethan Chiu
  */
 public class GymFileManager {
 
-    /**
-     * Saves all members from the gym system into a CSV file.
-     *
-     * @param filename output CSV filename
-     * @param gymSystem system to save
-     * @return true if save succeeds, false otherwise
-     */
     public static boolean saveToCsv(String filename, GymSystem gymSystem) {
         try {
             PrintWriter writer = new PrintWriter(new File(filename));
@@ -43,17 +34,11 @@ public class GymFileManager {
             return true;
 
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 
-    /**
-     * Loads member data from a CSV file into the gym system.
-     *
-     * @param filename input CSV filename
-     * @param gymSystem system to load into
-     * @return true if load succeeds, false otherwise
-     */
     public static boolean loadFromCsv(String filename, GymSystem gymSystem) {
         try {
             Scanner fileScanner = new Scanner(new File(filename));
@@ -61,7 +46,7 @@ public class GymFileManager {
             gymSystem.clearAllData();
 
             if (fileScanner.hasNextLine()) {
-                fileScanner.nextLine(); // skip header
+                fileScanner.nextLine();
             }
 
             while (fileScanner.hasNextLine()) {
@@ -85,6 +70,7 @@ public class GymFileManager {
                     member.setTotalVisits(visits);
                     member.setTotalPaid(totalPaid);
                     member.setActive(active);
+
                     gymSystem.addMember(member);
                 }
             }
@@ -99,9 +85,9 @@ public class GymFileManager {
     }
 
     private static Membership createMembershipFromType(String type, String startDate, String endDate) {
-        if (type.equalsIgnoreCase("Monthly")) {
+        if (type.equalsIgnoreCase(GymSystem.TYPE_MONTHLY)) {
             return new MonthlyMembership(startDate, endDate);
-        } else if (type.equalsIgnoreCase("Quarterly")) {
+        } else if (type.equalsIgnoreCase(GymSystem.TYPE_QUARTERLY)) {
             return new QuarterlyMembership(startDate, endDate);
         } else {
             return new AnnualMembership(startDate, endDate);
